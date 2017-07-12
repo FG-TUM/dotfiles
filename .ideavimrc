@@ -1,0 +1,10 @@
+" search options
+set ignorecase
+" override ignorecase when search contains uppercase items
+set smartcase
+" highlights search while typing
+set incsearch
+
+" moving document up / down
+nnoremap <C-k> <C-y>k
+nnoremap <C-j> <C-e>j

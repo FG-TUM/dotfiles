@@ -1,0 +1,23 @@
+" spellcheck english and german
+set spelllang=en,de
+" since makefiles depend on tabs do not expand them there
+autocmd FileType make setlocal noexpandtab
+" disable ugly bars on indent
+"set IndentGuides=0
+
+" brighter normal text
+highlight Normal ctermfg=253
+
+" associate .gp files with gnuplot syntax highlighting
+au BufRead,BufNewFile *.gp set filetype=gnuplot
+
+" better Haskell comments through nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDAltDelims_haskell = 1
+
+"shortcut for running the current script in the shell
+nnoremap <leader>r :!%:p<Enter>
+
+" moving document up / down
+nnoremap <C-k> <C-y>k
+nnoremap <C-j> <C-e>j
