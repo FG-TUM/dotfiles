@@ -135,6 +135,9 @@ alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
+# necessary thanks to JetBrains-toolbox
+alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
+alias intellij="$(find /opt/JetBrains/apps/CLion -name 'idea.sh')"
 
 calc()
 {
