@@ -71,26 +71,15 @@ $PATH
 /usr/bin/vendor_perl
 /usr/bin/core_perl
 #user added
-/home/reaper/software/paraview/install/bin/
-/home/reaper/software/gocode/bin
-/home/reaper/software/dock
-/home/reaper/.cabal/bin
-/home/reaper/workspace/android-sdks/tools
-/opt/intel/compilers_and_libraries/linux/bin/intel64
-/opt/intel/vtune_amplifier_xe/bin64
-/opt/intel/advisor/bin64
-/opt/intel/inspector/bin64
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
-export GOPATH=/home/reaper/software/gocode
-export VIMRC=/home/reaper/.vimrc
+export GOPATH=/home/${USER}/software/gocode
+export VIMRC=/home/${USER}/.vimrc
 
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
 #user added
-/opt/cuda/lib64
-/home/reaper/GuidedResearch/quicksched-1.1.0/src
 EOF`
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -123,18 +112,20 @@ EOF`
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export QUICKSCHED_BHFMM="/home/reaper/MasterThesis/mardyn/quicksched_bhfmm"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
-alias vivaldi="vivaldi-stable"
-alias paraview="optirun paraview"
+# alias vivaldi="vivaldi-stable"
+# alias paraview="optirun paraview"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
+# necessary thanks to JetBrains-toolbox
+# alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
+# alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
 calc()
 {
