@@ -79,8 +79,8 @@ $(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
-export GOPATH=/home/reaper/software/gocode
-export VIMRC=/home/reaper/.vimrc
+export GOPATH=/home/${USER}/software/gocode
+export VIMRC=/home/${USER}/.vimrc
 
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
@@ -123,6 +123,7 @@ alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
+alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 # necessary thanks to JetBrains-toolbox
 alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
