@@ -87,6 +87,7 @@ $LD_LIBRARY_PATH
 #user added
 EOF`
 
+export INTEL_LICENSE_FILE=~/Licenses/
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
