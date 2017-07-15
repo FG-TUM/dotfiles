@@ -1,0 +1,10 @@
+# update / install:
+# wget git.io/.gdbinit
+
+
+dashboard -layout !assembly expressions !history !memory !registers !threads stack source
+#dashboard source -output /dev/pts/1
+
+# more compact backtrace
+dashboard stack -style arguments False
+dashboard stack -style limit 20
