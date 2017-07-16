@@ -71,6 +71,7 @@ $PATH
 /usr/bin/vendor_perl
 /usr/bin/core_perl
 #user added
+/u/halle/${USER}/home_at/scripts
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
