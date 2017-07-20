@@ -80,11 +80,15 @@ $PATH
 /opt/intel/vtune_amplifier_xe/bin64
 /opt/intel/advisor/bin64
 /opt/intel/inspector/bin64
+#$(ls -dt /opt/intel/inspector* | head -n 1)/bin64
+#$(ls -dt /opt/intel/advisor* | head -n 1)/bin64
+#$(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
+#$(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
-export GOPATH=/home/reaper/software/gocode
-export VIMRC=/home/reaper/.vimrc
+export GOPATH=/home/${USER}/software/gocode
+export VIMRC=/home/${USER}/.vimrc
 
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
@@ -93,6 +97,7 @@ $LD_LIBRARY_PATH
 /home/reaper/GuidedResearch/quicksched-1.1.0/src
 EOF`
 
+#export INTEL_LICENSE_FILE=~/Licenses/
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -135,6 +140,9 @@ alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
+# necessary thanks to JetBrains-toolbox
+# alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
+# alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
 calc()
 {
