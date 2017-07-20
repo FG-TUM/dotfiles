@@ -71,6 +71,10 @@ $PATH
 /usr/bin/vendor_perl
 /usr/bin/core_perl
 #user added
+#$(ls -dt /opt/intel/inspector* | head -n 1)/bin64
+#$(ls -dt /opt/intel/advisor* | head -n 1)/bin64
+#$(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
+#$(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
@@ -82,6 +86,7 @@ $LD_LIBRARY_PATH
 #user added
 EOF`
 
+#export INTEL_LICENSE_FILE=~/Licenses/
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -111,7 +116,6 @@ EOF`
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
