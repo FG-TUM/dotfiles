@@ -80,10 +80,10 @@ $PATH
 /opt/intel/vtune_amplifier_xe/bin64
 /opt/intel/advisor/bin64
 /opt/intel/inspector/bin64
-#$(ls -dt /opt/intel/inspector* | head -n 1)/bin64
-#$(ls -dt /opt/intel/advisor* | head -n 1)/bin64
-#$(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
-#$(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
