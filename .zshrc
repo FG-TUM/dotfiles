@@ -71,10 +71,10 @@ $PATH
 /usr/bin/vendor_perl
 /usr/bin/core_perl
 #user added
-#$(ls -dt /opt/intel/inspector* | head -n 1)/bin64
-#$(ls -dt /opt/intel/advisor* | head -n 1)/bin64
-#$(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
-#$(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
