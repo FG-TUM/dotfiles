@@ -54,7 +54,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux archlinux-patch common-aliases colored-man-pages git mvn nyan systemd zsh-navigation-tools)
+plugins=(archlinux archlinux-patch common-aliases colored-man-pages git mvn nyan svn systemd zsh-navigation-tools)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -80,7 +80,7 @@ $PATH
 /opt/intel/vtune_amplifier_xe/bin64
 /opt/intel/advisor/bin64
 /opt/intel/inspector/bin64
-# $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
+$(ls -dt /opt/intel/inspector* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
@@ -143,6 +143,16 @@ alias ocaml="rlwrap ocaml"
 # necessary thanks to JetBrains-toolbox
 # alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
 # alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
+
+# insert sudo when searching from root
+find()
+{
+    if [[ $1 == '/' ]]; then
+        command sudo find $@
+    else
+        command find $@
+    fi
+}
 
 calc()
 {
