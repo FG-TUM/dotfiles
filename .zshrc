@@ -149,7 +149,7 @@ texstudio()
     else
         languagetool --http > /dev/null &
         command texstudio $@
-        PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | cut -d ' ' -f 1)
+        PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
         echo ${PID_languagetool//$'\n'/ } | xargs kill
     fi
 }
