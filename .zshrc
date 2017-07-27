@@ -141,6 +141,19 @@ alias ocaml="rlwrap ocaml"
 # alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
 # alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
+# starts languagetool server if available and texstudio and terminates all processes on return
+texstudio()
+{
+    if [[ $(where languagetool) == "languagetool not found" ]]; then
+        command texstudio $@
+    else
+        languagetool --http > /dev/null &
+        command texstudio $@
+        PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | cut -d ' ' -f 1)
+        echo ${PID_languagetool//$'\n'/ } | xargs kill
+    fi
+}
+
 # insert sudo when searching from root
 find()
 {
