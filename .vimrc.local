@@ -16,7 +16,7 @@ let g:NERDSpaceDelims = 1
 let g:NERDAltDelims_haskell = 1
 
 "shortcut for running the current script in the shell
-nnoremap <leader>r :!%:p<Enter>
+nnoremap <leader>r :w\|!%:p<Enter>
 
 " moving document up / down
 nnoremap <C-k> <C-y>k
