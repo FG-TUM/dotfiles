@@ -15,6 +15,14 @@ au BufRead,BufNewFile *.gp set filetype=gnuplot
 let g:NERDSpaceDelims = 1
 let g:NERDAltDelims_haskell = 1
 
+" in order to switch to python 2 delete compiled pyc files
+" find ~/.vim/bundle/python-mode -name '*.pyc' -delete
+let g:pymode_python = 'python3'
+
+" fast buffer cycling
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+
 "shortcut for running the current script in the shell
 nnoremap <leader>r :w\|!%:p<Enter>
 
