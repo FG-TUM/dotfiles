@@ -54,31 +54,27 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux archlinux-patch common-aliases colored-man-pages git mvn nyan systemd zsh-navigation-tools)
+plugins=(common-aliases colored-man-pages git mvn nyan systemd ubuntu zsh-navigation-tools)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-#eval $(thefuck --alias)
+eval $(thefuck --alias)
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
-/usr/local/sbin
-/usr/local/bin
-/usr/bin
-/usr/bin/site_perl
-/usr/bin/vendor_perl
-/usr/bin/core_perl
 #user added
 # $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
+/home/ga68cat/work_fast/CLion-2017.3.3/bin
+/work/ga68cat/software/LanguageTool-4.0/bin
 EOF`
 
-export JAVA_HOME=/usr/lib/jvm/default
-export GOPATH=/home/${USER}/software/gocode
+export JAVA_HOME=/usr/lib/jvm/default-java
+export GOPATH=/home/ga68cat/work/software/gocode
 export VIMRC=/home/${USER}/.vimrc
 
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
@@ -86,6 +82,9 @@ $LD_LIBRARY_PATH
 #user added
 EOF`
 
+# load icc
+source /home/software/intel/compilers_and_libraries/linux/bin/compilervars.sh intel64
+source /home/software/intel/vtune_amplifier_xe_2017.2.0.499904/amplxe-vars.zsh >/dev/null
 #export INTEL_LICENSE_FILE=~/Licenses/
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -131,6 +130,8 @@ alias ocaml="rlwrap ocaml"
 # alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
 # alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
+alias ws="cd ~/work/workspace/"
+
 calc()
 {
     printf "%.${2:-3}f\n" $(bc -l <<< ${1})
@@ -142,3 +143,15 @@ wttr()
 
 }
 
+texstudio()
+{
+    if [[ $(where languagetool-startServer.sh) == "languagetool-startServer.sh not found" ]]; then
+        echo "WARNING: languagetool not found"
+        command texstudio $@
+    else
+        languagetool-startServer.sh > /dev/null &
+        command texstudio $@
+        PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
+        echo ${PID_languagetool//$'\n'/ } | xargs kill
+    fi
+}
