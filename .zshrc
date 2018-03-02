@@ -54,7 +54,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases colored-man-pages git mvn nyan systemd ubuntu zsh-navigation-tools)
+plugins=(common-aliases colored-man-pages git gradle mvn nyan systemd ubuntu zsh-navigation-tools)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,11 +126,13 @@ alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
+alias vtune="AMPLXE_MORE_PIN_OPTIONS='-ifeellucky' amplxe-gui"
 # necessary thanks to JetBrains-toolbox
 # alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
+alias clion="clion.sh"
 # alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
-alias ws="cd ~/work/workspace/"
+export ws=~/work/workspace/
 
 calc()
 {
