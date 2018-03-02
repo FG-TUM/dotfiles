@@ -129,6 +129,7 @@ alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 # necessary thanks to JetBrains-toolbox
 # alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
+alias clion="clion.sh"
 # alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
 calc()
