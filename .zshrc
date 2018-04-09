@@ -76,12 +76,12 @@ $PATH
 /home/reaper/software/dock
 /home/reaper/.cabal/bin
 /home/reaper/workspace/android-sdks/tools
-# /opt/intel/compilers_and_libraries/linux/bin/intel64
 $(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
-$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
-$(\ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/linux/bin/intel64
-$(\ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
+/home/reaper/tutorials/upcxx/upcxx_src/installDir/bin
 EOF`
+#$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
+#$(\ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/linux/bin/intel64
+#$(\ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 
 export JAVA_HOME=/usr/lib/jvm/default
 export GOPATH=/home/${USER}/software/gocode
@@ -137,6 +137,7 @@ alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
+alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 # necessary thanks to JetBrains-toolbox
 # alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
 # alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
@@ -175,5 +176,34 @@ wttr()
 
 }
 
+shrinkImage()
+{
+    if [[ $# < 1 ]]; then
+        echo "Usage: " $0 " PATH_TO_IMAGE"
+    else
+        inkscape -D -A $1 $1
+    fi
+}
+
+grepPDF()
+{
+    find ${2:-\.} -name '*.pdf' -exec sh -c "pdftotext '{}' - | grep --with-filename --label='{}' --color --ignore-case '${1}'" \;
+}
+
+cleanTeX()
+{
+    direcory=${1:-\.}
+    direcory=${direcory%/}
+
+    rm ${direcory}/*.aux        > /dev/null 2>&1
+    rm ${direcory}/*.log        > /dev/null 2>&1
+    rm ${direcory}/*.nav        > /dev/null 2>&1
+    rm ${direcory}/*.out        > /dev/null 2>&1
+    rm ${direcory}/*.pdfpc      > /dev/null 2>&1
+    rm ${direcory}/*.snm        > /dev/null 2>&1
+    rm ${direcory}/*.synctex.gz > /dev/null 2>&1
+    rm ${direcory}/*.toc        > /dev/null 2>&1
+    rm ${direcory}/*.vrb        > /dev/null 2>&1
+}
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
