@@ -1,0 +1,6 @@
+Bundle 'Konfekt/FastFold'
+
+" disable ugly vertical bars
+UnBundle '~/.vim/bundle/vim-indent-guides'
+
+Bundle 'octol/vim-cpp-enhanced-highlight'
