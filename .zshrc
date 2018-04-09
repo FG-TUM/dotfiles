@@ -71,13 +71,12 @@ $PATH
 /usr/bin/vendor_perl
 /usr/bin/core_perl
 #user added
-/home/reaper/software/paraview/install/bin/
-/home/reaper/software/gocode/bin
-/home/reaper/software/dock
-/home/reaper/.cabal/bin
-/home/reaper/workspace/android-sdks/tools
+~/software/paraview/install/bin/
+~/software/gocode/bin
+~/software/dock
+~/.cabal/bin
+~/workspace/android-sdks/tools
 $(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
-/home/reaper/tutorials/upcxx/upcxx_src/installDir/bin
 EOF`
 #$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
 #$(\ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/linux/bin/intel64
@@ -91,7 +90,6 @@ export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
 #user added
 /opt/cuda/lib64
-/home/reaper/GuidedResearch/quicksched-1.1.0/src
 EOF`
 
 #export INTEL_LICENSE_FILE=~/Licenses/
@@ -124,8 +122,6 @@ EOF`
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export QUICKSCHED_BHFMM="/home/reaper/MasterThesis/mardyn/quicksched_bhfmm"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
