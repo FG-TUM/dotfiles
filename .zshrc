@@ -71,6 +71,9 @@ $PATH
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 /home/ga68cat/work_fast/CLion-2017.3.3/bin
 /work/ga68cat/software/LanguageTool-4.0/bin
+/work/ga68cat/workspace/GROMACS/gromacs-2018/install/bin
+/home/ga68cat/work/software/ParaView-5.5.0-RC3-Qt5-MPI-Linux-64bit/bin
+/home/ga68cat/work/software/vmd-1.9.3/installDir/bin
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default-java
