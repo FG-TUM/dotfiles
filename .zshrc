@@ -168,8 +168,8 @@ calc()
 
 wttr()
 {
-    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
-
+    # curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
+    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Garching}"
 }
 
 shrinkImage()
