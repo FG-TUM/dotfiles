@@ -136,18 +136,8 @@ alias clion="clion.sh"
 # alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
 export ws=~/work/workspace/
-
-calc()
-{
-    printf "%.${2:-3}f\n" $(bc -l <<< ${1})
-}
-
-wttr()
-{
-    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
-
-}
-
+#
+# starts languagetool server if available and texstudio and terminates all processes on return
 texstudio()
 {
     if [[ $(where languagetool-startServer.sh) == "languagetool-startServer.sh not found" ]]; then
@@ -160,3 +150,58 @@ texstudio()
         echo ${PID_languagetool//$'\n'/ } | xargs kill
     fi
 }
+
+# insert sudo when searching from root
+find()
+{
+    if [[ $1 == '/' ]]; then
+        command sudo find $@
+    else
+        command find $@
+    fi
+}
+
+calc()
+{
+    printf "%.${2:-3}f\n" $(bc -l <<< ${1})
+}
+
+wttr()
+{
+    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
+
+}
+
+shrinkImage()
+{
+    if [[ $# < 1  ]]; then
+        echo "Usage: " $0 " PATH_TO_IMAGE"
+    else
+        inkscape -D -A $1 $1
+    fi
+
+}
+
+grepPDF()
+{
+    find ${2:-\.} -name '*.pdf' -exec sh -c "pdftotext '{}' - | grep --with-filename --label='{}' --color --ignore-case '${1}'" \;
+
+}
+
+cleanTeX()
+{
+    direcory=${1:-\.}
+    direcory=${direcory%/}
+    rm ${direcory}/*.aux        > /dev/null 2>&1
+    rm ${direcory}/*.log        > /dev/null 2>&1
+    rm ${direcory}/*.nav        > /dev/null 2>&1
+    rm ${direcory}/*.out        > /dev/null 2>&1
+    rm ${direcory}/*.pdfpc      > /dev/null 2>&1
+    rm ${direcory}/*.snm        > /dev/null 2>&1
+    rm ${direcory}/*.synctex.gz > /dev/null 2>&1
+    rm ${direcory}/*.toc        > /dev/null 2>&1
+    rm ${direcory}/*.vrb        > /dev/null 2>&1
+
+}
+# so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+ stty -ixon
