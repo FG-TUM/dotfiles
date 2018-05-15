@@ -69,16 +69,17 @@ $PATH
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
-/home/ga68cat/work_fast/CLion-2017.3.3/bin
-/work/ga68cat/software/LanguageTool-4.0/bin
-/work/ga68cat/workspace/GROMACS/gromacs-2018/install/bin
-/home/ga68cat/work/software/ParaView-5.5.0-RC3-Qt5-MPI-Linux-64bit/bin
-/home/ga68cat/work/software/vmd-1.9.3/installDir/bin
+${HOME}/work_fast/CLion-2017.3.3/bin
+${HOME}/work/software/LanguageTool-4.0/bin
+${HOME}/work/workspace/GROMACS/gromacs-2018/install/bin
+${HOME}/work/software/ParaView-5.5.0-RC3-Qt5-MPI-Linux-64bit/bin
+${HOME}/work/software/vmd-1.9.3/installDir/bin
+${HOME}/.local/share/JetBrains/Toolbox/bin
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default-java
-export GOPATH=/home/ga68cat/work/software/gocode
-export VIMRC=/home/${USER}/.vimrc
+export GOPATH=${HOME}/work/software/gocode
+export VIMRC=${HOME}/.vimrc
 
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
@@ -130,10 +131,15 @@ alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias vtune="AMPLXE_MORE_PIN_OPTIONS='-ifeellucky' amplxe-gui"
+
 # necessary thanks to JetBrains-toolbox
-# alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
-alias clion="clion.sh"
-# alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
+clion() {
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh')
+}
+
+intellij() {
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/IDEA-U -name 'idea.sh')
+}
 
 export ws=~/work/workspace/
 #
