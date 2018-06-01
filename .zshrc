@@ -131,14 +131,15 @@ alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias vtune="AMPLXE_MORE_PIN_OPTIONS='-ifeellucky' amplxe-gui"
+alias ccmake-3.11.1="${HOME}/work/software/cmake-3.11.1/install/bin/ccmake"
 
 # necessary thanks to JetBrains-toolbox
 clion() {
-    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh')
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh' | head -n 1) $@
 }
 
 intellij() {
-    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/IDEA-U -name 'idea.sh')
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
 }
 
 export ws=~/work/workspace/
@@ -211,3 +212,4 @@ cleanTeX()
 }
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
  stty -ixon
+export GPG_TTY=$(tty)
