@@ -71,6 +71,7 @@ $PATH
 /usr/bin/vendor_perl
 /usr/bin/core_perl
 #user added
+#~/.cabal/bin
 # $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
@@ -84,6 +85,7 @@ export VIMRC=/home/${USER}/.vimrc
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
 #user added
+#/opt/cuda/lib64
 EOF`
 
 #export INTEL_LICENSE_FILE=~/Licenses/
@@ -105,32 +107,49 @@ EOF`
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export GPG_TTY=$(tty)
+
 # vi input mode
 #set -o vi
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
-# alias vivaldi="vivaldi-stable"
-# alias paraview="optirun paraview"
+#alias vivaldi="vivaldi-stable"
+#alias paraview="optirun paraview"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
+alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 # necessary thanks to JetBrains-toolbox
-# alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
-alias clion="clion.sh"
-# alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
+alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
+alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
+
+# starts languagetool server if available and texstudio and terminates all processes on return
+texstudio()
+{
+    if [[ $(where languagetool) == "languagetool not found" ]]; then
+        command texstudio $@
+    else
+        languagetool --http > /dev/null &
+        command texstudio $@
+        PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
+        echo ${PID_languagetool//$'\n'/ } | xargs kill
+    fi
+}
+
+# insert sudo when searching from root
+find()
+{
+    if [[ $1 == '/' ]]; then
+        command sudo find $@
+    else
+        command find $@
+    fi
+}
 
 calc()
 {
@@ -139,7 +158,16 @@ calc()
 
 wttr()
 {
-    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
+    # curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
+    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Garching}"
+}
 
+shrinkImage()
+{
+    if [[ $# < 1 ]]; then
+        echo "Usage: " $0 " PATH_TO_IMAGE"
+    else
+        inkscape -D -A $1 $1
+    fi
 }
 
