@@ -111,6 +111,8 @@ EOF`
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export GPG_TTY=$(tty)
+
 # vi input mode
 #set -o vi
 
@@ -135,8 +137,8 @@ alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 # necessary thanks to JetBrains-toolbox
-# alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
-# alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
+alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
+alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
 
 # starts languagetool server if available and texstudio and terminates all processes on return
 texstudio()
@@ -188,18 +190,21 @@ grepPDF()
 
 cleanTeX()
 {
+    setopt +o nomatch
     direcory=${1:-\.}
     direcory=${direcory%/}
 
-    rm ${direcory}/*.aux        > /dev/null 2>&1
-    rm ${direcory}/*.log        > /dev/null 2>&1
-    rm ${direcory}/*.nav        > /dev/null 2>&1
-    rm ${direcory}/*.out        > /dev/null 2>&1
-    rm ${direcory}/*.pdfpc      > /dev/null 2>&1
-    rm ${direcory}/*.snm        > /dev/null 2>&1
-    rm ${direcory}/*.synctex.gz > /dev/null 2>&1
-    rm ${direcory}/*.toc        > /dev/null 2>&1
-    rm ${direcory}/*.vrb        > /dev/null 2>&1
+    rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.nav        > /dev/null 2>&1
+    rm -f ${direcory}/*.out        > /dev/null 2>&1
+    rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
+    rm -f ${direcory}/*.ps         > /dev/null 2>&1
+    rm -f ${direcory}/*.snm        > /dev/null 2>&1
+    rm -f ${direcory}/*.synctex.gz > /dev/null 2>&1
+    rm -f ${direcory}/*.toc        > /dev/null 2>&1
+    rm -f ${direcory}/*.vrb        > /dev/null 2>&1
 }
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
