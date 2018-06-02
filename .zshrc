@@ -182,19 +182,21 @@ grepPDF()
 
 cleanTeX()
 {
+    setopt +o nomatch
     direcory=${1:-\.}
     direcory=${direcory%/}
-    rm ${direcory}/*.aux        > /dev/null 2>&1
-    rm ${direcory}/*.log        > /dev/null 2>&1
-    rm ${direcory}/*.nav        > /dev/null 2>&1
-    rm ${direcory}/*.out        > /dev/null 2>&1
-    rm ${direcory}/*.pdfpc      > /dev/null 2>&1
-    rm ${direcory}/*.snm        > /dev/null 2>&1
-    rm ${direcory}/*.synctex.gz > /dev/null 2>&1
-    rm ${direcory}/*.toc        > /dev/null 2>&1
-    rm ${direcory}/*.vrb        > /dev/null 2>&1
 
+    rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.nav        > /dev/null 2>&1
+    rm -f ${direcory}/*.out        > /dev/null 2>&1
+    rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
+    rm -f ${direcory}/*.ps         > /dev/null 2>&1
+    rm -f ${direcory}/*.snm        > /dev/null 2>&1
+    rm -f ${direcory}/*.synctex.gz > /dev/null 2>&1
+    rm -f ${direcory}/*.toc        > /dev/null 2>&1
+    rm -f ${direcory}/*.vrb        > /dev/null 2>&1
 }
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
- stty -ixon
-export GPG_TTY=$(tty)
+stty -ixon
