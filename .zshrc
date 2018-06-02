@@ -64,12 +64,6 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
-/usr/local/sbin
-/usr/local/bin
-/usr/bin
-/usr/bin/site_perl
-/usr/bin/vendor_perl
-/usr/bin/core_perl
 #user added
 #~/.cabal/bin
 # $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
@@ -125,16 +119,25 @@ alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 # necessary thanks to JetBrains-toolbox
-alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
-alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
+clion() {
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh' | head -n 1) $@
+}
 
+intellij() {
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
+}
+
+export ws=~/work/workspace/
+#
 # starts languagetool server if available and texstudio and terminates all processes on return
 texstudio()
 {
-    if [[ $(where languagetool) == "languagetool not found" ]]; then
+    if [[ $(where languagetool-startServer.sh) == "languagetool-startServer.sh not found" ]]; then
+        echo "WARNING: languagetool not found"
         command texstudio $@
     else
         languagetool --http > /dev/null &
+        #languagetool-startServer.sh > /dev/null &
         command texstudio $@
         PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
         echo ${PID_languagetool//$'\n'/ } | xargs kill
@@ -171,3 +174,27 @@ shrinkImage()
     fi
 }
 
+grepPDF()
+{
+    find ${2:-\.} -name '*.pdf' -exec sh -c "pdftotext '{}' - | grep --with-filename --label='{}' --color --ignore-case '${1}'" \;
+
+}
+
+cleanTeX()
+{
+    direcory=${1:-\.}
+    direcory=${direcory%/}
+    rm ${direcory}/*.aux        > /dev/null 2>&1
+    rm ${direcory}/*.log        > /dev/null 2>&1
+    rm ${direcory}/*.nav        > /dev/null 2>&1
+    rm ${direcory}/*.out        > /dev/null 2>&1
+    rm ${direcory}/*.pdfpc      > /dev/null 2>&1
+    rm ${direcory}/*.snm        > /dev/null 2>&1
+    rm ${direcory}/*.synctex.gz > /dev/null 2>&1
+    rm ${direcory}/*.toc        > /dev/null 2>&1
+    rm ${direcory}/*.vrb        > /dev/null 2>&1
+
+}
+# so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+ stty -ixon
+export GPG_TTY=$(tty)
