@@ -143,20 +143,6 @@ intellij() {
 }
 
 export ws=~/work/workspace/
-#
-# starts languagetool server if available and texstudio and terminates all processes on return
-texstudio()
-{
-    if [[ $(where languagetool-startServer.sh) == "languagetool-startServer.sh not found" ]]; then
-        echo "WARNING: languagetool not found"
-        command texstudio $@
-    else
-        languagetool-startServer.sh > /dev/null &
-        command texstudio $@
-        PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
-        echo ${PID_languagetool//$'\n'/ } | xargs kill
-    fi
-}
 
 # insert sudo when searching from root
 find()
