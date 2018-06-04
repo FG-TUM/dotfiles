@@ -108,17 +108,11 @@ source /home/software/intel/vtune_amplifier_xe_2017.2.0.499904/amplxe-vars.zsh >
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export GPG_TTY=$(tty)
+
 # vi input mode
 #set -o vi
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
@@ -130,9 +124,7 @@ alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
-alias vtune="AMPLXE_MORE_PIN_OPTIONS='-ifeellucky' amplxe-gui"
-alias ccmake-3.11.1="${HOME}/work/software/cmake-3.11.1/install/bin/ccmake"
-
+alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 # necessary thanks to JetBrains-toolbox
 clion() {
     $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh' | head -n 1) $@
@@ -161,18 +153,17 @@ calc()
 
 wttr()
 {
-    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
-
+    # curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Munich}"
+    curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-Garching}"
 }
 
 shrinkImage()
 {
-    if [[ $# < 1  ]]; then
+    if [[ $# < 1 ]]; then
         echo "Usage: " $0 " PATH_TO_IMAGE"
     else
         inkscape -D -A $1 $1
     fi
-
 }
 
 grepPDF()
@@ -183,19 +174,21 @@ grepPDF()
 
 cleanTeX()
 {
+    setopt +o nomatch
     direcory=${1:-\.}
     direcory=${direcory%/}
-    rm ${direcory}/*.aux        > /dev/null 2>&1
-    rm ${direcory}/*.log        > /dev/null 2>&1
-    rm ${direcory}/*.nav        > /dev/null 2>&1
-    rm ${direcory}/*.out        > /dev/null 2>&1
-    rm ${direcory}/*.pdfpc      > /dev/null 2>&1
-    rm ${direcory}/*.snm        > /dev/null 2>&1
-    rm ${direcory}/*.synctex.gz > /dev/null 2>&1
-    rm ${direcory}/*.toc        > /dev/null 2>&1
-    rm ${direcory}/*.vrb        > /dev/null 2>&1
 
+    rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.nav        > /dev/null 2>&1
+    rm -f ${direcory}/*.out        > /dev/null 2>&1
+    rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
+    rm -f ${direcory}/*.ps         > /dev/null 2>&1
+    rm -f ${direcory}/*.snm        > /dev/null 2>&1
+    rm -f ${direcory}/*.synctex.gz > /dev/null 2>&1
+    rm -f ${direcory}/*.toc        > /dev/null 2>&1
+    rm -f ${direcory}/*.vrb        > /dev/null 2>&1
 }
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
- stty -ixon
-export GPG_TTY=$(tty)
+stty -ixon
