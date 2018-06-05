@@ -10,7 +10,7 @@ set wrap
 highlight Normal ctermfg=253
 
 " associate .gp files with gnuplot syntax highlighting
-au BufRead,BufNewFile *.gp set filetype=gnuplot
+autocmd BufRead,BufNewFile *.gp set filetype=gnuplot
 
 " better Haskell comments through nerdcommenter
 let g:NERDSpaceDelims = 1
@@ -32,5 +32,7 @@ nnoremap <C-k> <C-y>k
 nnoremap <C-j> <C-e>j
 
 set foldmethod=syntax
+" automatically expand all folds then opening any file
+autocmd BufRead * normal zR
 
 set shell=/bin/zsh
