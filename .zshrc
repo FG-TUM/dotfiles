@@ -64,12 +64,6 @@ eval $(thefuck --alias)
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
-/usr/local/sbin
-/usr/local/bin
-/usr/bin
-/usr/bin/site_perl
-/usr/bin/vendor_perl
-/usr/bin/core_perl
 #user added
 ~/software/paraview/install/bin/
 ~/software/gocode/bin
@@ -89,7 +83,7 @@ export VIMRC=/home/${USER}/.vimrc
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
 #user added
-/opt/cuda/lib64
+#/opt/cuda/lib64
 EOF`
 
 #export INTEL_LICENSE_FILE=~/Licenses/
@@ -111,23 +105,17 @@ EOF`
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export GPG_TTY=$(tty)
+
 # vi input mode
 #set -o vi
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
-alias vivaldi="vivaldi-stable"
+# alias vivaldi="vivaldi-stable"
 alias paraview="optirun paraview"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
@@ -135,21 +123,30 @@ alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 # necessary thanks to JetBrains-toolbox
-# alias clion="$(find /opt/JetBrains/apps/CLion -name 'clion.sh')"
-# alias intellij="$(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh')"
-
-# starts languagetool server if available and texstudio and terminates all processes on return
-texstudio()
-{
-    if [[ $(where languagetool) == "languagetool not found" ]]; then
-        command texstudio $@
-    else
-        languagetool --http > /dev/null &
-        command texstudio $@
-        PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
-        echo ${PID_languagetool//$'\n'/ } | xargs kill
-    fi
+clion() {
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh' | head -n 1) $@
 }
+
+intellij() {
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
+}
+
+
+# ONLY NECESSARY WITH OLD VERSIONS OF TEXSTUDIO / LANGUAGETOOL
+# starts languagetool server if available and texstudio and terminates all processes on return
+# texstudio()
+# {
+    # if [[ $(where languagetool-startServer.sh) == "languagetool-startServer.sh not found" ]]; then
+        # echo "WARNING: languagetool not found"
+        # command texstudio $@
+    # else
+        # languagetool --http > /dev/null &
+        # #languagetool-startServer.sh > /dev/null &
+        # command texstudio $@
+        # PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
+        # echo ${PID_languagetool//$'\n'/ } | xargs kill
+    # fi
+# }
 
 # insert sudo when searching from root
 find()
@@ -188,18 +185,21 @@ grepPDF()
 
 cleanTeX()
 {
+    setopt +o nomatch
     direcory=${1:-\.}
     direcory=${direcory%/}
 
-    rm ${direcory}/*.aux        > /dev/null 2>&1
-    rm ${direcory}/*.log        > /dev/null 2>&1
-    rm ${direcory}/*.nav        > /dev/null 2>&1
-    rm ${direcory}/*.out        > /dev/null 2>&1
-    rm ${direcory}/*.pdfpc      > /dev/null 2>&1
-    rm ${direcory}/*.snm        > /dev/null 2>&1
-    rm ${direcory}/*.synctex.gz > /dev/null 2>&1
-    rm ${direcory}/*.toc        > /dev/null 2>&1
-    rm ${direcory}/*.vrb        > /dev/null 2>&1
+    rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.nav        > /dev/null 2>&1
+    rm -f ${direcory}/*.out        > /dev/null 2>&1
+    rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
+    rm -f ${direcory}/*.ps         > /dev/null 2>&1
+    rm -f ${direcory}/*.snm        > /dev/null 2>&1
+    rm -f ${direcory}/*.synctex.gz > /dev/null 2>&1
+    rm -f ${direcory}/*.toc        > /dev/null 2>&1
+    rm -f ${direcory}/*.vrb        > /dev/null 2>&1
 }
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
