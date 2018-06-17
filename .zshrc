@@ -65,11 +65,11 @@ eval $(thefuck --alias)
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
 #user added
-~/software/paraview/install/bin/
+# ~/software/paraview/install/bin/
 ~/software/gocode/bin
-~/software/dock
+# ~/software/dock
 ~/.cabal/bin
-~/workspace/android-sdks/tools
+# ~/workspace/android-sdks/tools
 $(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
 EOF`
 #$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
@@ -116,7 +116,7 @@ export GPG_TTY=$(tty)
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
 # alias vivaldi="vivaldi-stable"
-alias paraview="optirun paraview"
+# alias paraview="optirun paraview"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
