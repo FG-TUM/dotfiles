@@ -54,13 +54,25 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases colored-man-pages git gradle mvn nyan systemd ubuntu zsh-navigation-tools)
+plugins=(common-aliases colored-man-pages docker git gpg-agent gradle mvn nyan systemd ubuntu zsh-navigation-tools)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 eval $(thefuck --alias)
+
+# source ${HOME}/work/software/cheatsheet/zsh_completion.sh
+# COMPLETION SETTINGS
+# add custom completion scripts
+fpath=(~/.oh-my-zsh/custom/completions $fpath) 
+
+# compsys initialization
+autoload -U compinit
+compinit
+
+# show completion menu when number of options is at least 2
+zstyle ':completion:*' menu select=2
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
@@ -75,6 +87,7 @@ ${HOME}/work/workspace/GROMACS/gromacs-2018/install/bin
 ${HOME}/work/software/ParaView-5.5.0-RC3-Qt5-MPI-Linux-64bit/bin
 ${HOME}/work/software/vmd-1.9.3/installDir/bin
 ${HOME}/work/software/cmake-3.11.1/install/bin
+${HOME}/work/software/cheatsheet/
 ${HOME}/.local/share/JetBrains/Toolbox/bin
 EOF`
 
@@ -181,8 +194,12 @@ cleanTeX()
     direcory=${direcory%/}
 
     rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.bbl        > /dev/null 2>&1
+    rm -f ${direcory}/*.blg        > /dev/null 2>&1
     rm -f ${direcory}/*.dvi        > /dev/null 2>&1
     rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.lof        > /dev/null 2>&1
+    rm -f ${direcory}/*.lot        > /dev/null 2>&1
     rm -f ${direcory}/*.nav        > /dev/null 2>&1
     rm -f ${direcory}/*.out        > /dev/null 2>&1
     rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
