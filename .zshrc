@@ -124,6 +124,8 @@ source /home/software/intel/vtune_amplifier_xe_2017.2.0.499904/amplxe-vars.zsh >
 
 export GPG_TTY=$(tty)
 
+export GTEST_COLOR=1
+
 # vi input mode
 #set -o vi
 
