@@ -231,5 +231,41 @@ cleanTeX()
     rm -f ${direcory}/*.toc        > /dev/null 2>&1
     rm -f ${direcory}/*.vrb        > /dev/null 2>&1
 }
+
+encrypt()
+{
+    if [[ $# < 1 ]]; then
+        echo "Usage: " $0 " file/folder"
+    else
+        payload=$1
+
+        tar --create --gzip --file ${payload}.tgz ${payload}     &&\
+        gpg --encrypt --recipient f.gratl@tum.de ${payload}.tgz  &&\
+        rm ${payload}.tgz                                        &&\
+        rm ${payload} -r
+    fi
+}
+
+decrypt()
+{
+    if [[ $# < 1 ]]; then
+        echo "Usage: " $0 " file/folder"
+    else
+        payload=$1
+        # check for correct suffix
+        if [ ${payload: -4} != '.gpg' ];
+        then
+            echo "File is not a .gpg file (bad suffix)."
+            return
+        fi
+
+        # delete suffix from decrypted file
+        gpg --decrypt ${payload} > ${payload%%.gpg} &&\
+        dtrx ${payload%%.gpg}                       &&\
+        rm ${payload%%.gpg}                         &&\
+        rm ${payload}
+    fi
+}
+
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
