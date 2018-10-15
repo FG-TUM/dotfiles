@@ -192,6 +192,23 @@ grepPDF()
 
 }
 
+oneDtoThreeD(){
+    if [[ $# < 4 ]]; then
+        echo "Usage: " $0 " dimX dimY dimZ index"
+    else
+        dimX=$1
+        dimY=$2
+        dimZ=$3
+        index=$4
+
+        indexX=$(bc <<< "${index} % ${dimX}")
+        indexY=$(bc <<< "(${index} / ${dimX}) % ${dimY}")
+        indexZ=$(bc <<< "(${index} / (${dimX} * ${dimY})) % ${dimZ}")
+        echo "3D index: " $indexX $indexY $indexZ
+    fi
+
+}
+
 cleanTeX()
 {
     setopt +o nomatch
