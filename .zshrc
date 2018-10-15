@@ -54,7 +54,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases colored-man-pages docker git gpg-agent gradle mvn nyan systemd ubuntu zsh-navigation-tools)
+plugins=(common-aliases colored-man-pages docker git gpg-agent gradle mvn systemd ubuntu zsh-navigation-tools)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -75,7 +75,6 @@ compinit
 zstyle ':completion:*' menu select=2
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
-$PATH
 #user added
 # $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
@@ -89,6 +88,7 @@ ${HOME}/work/software/vmd-1.9.3/installDir/bin
 ${HOME}/work/software/cmake-3.11.1/install/bin
 ${HOME}/work/software/cheatsheet/
 ${HOME}/.local/share/JetBrains/Toolbox/bin
+$PATH
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default-java
