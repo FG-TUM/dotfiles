@@ -240,9 +240,9 @@ encrypt()
         payload=$1
 
         tar --create --gzip --file ${payload}.tgz ${payload}     &&\
+        rm ${payload} -r                                         &&\
         gpg --encrypt --recipient f.gratl@tum.de ${payload}.tgz  &&\
-        rm ${payload}.tgz                                        &&\
-        rm ${payload} -r
+        rm ${payload}.tgz
     fi
 }
 
@@ -261,9 +261,9 @@ decrypt()
 
         # delete suffix from decrypted file
         gpg --decrypt ${payload} > ${payload%%.gpg} &&\
+        rm ${payload}                               &&\
         dtrx ${payload%%.gpg}                       &&\
-        rm ${payload%%.gpg}                         &&\
-        rm ${payload}
+        rm ${payload%%.gpg}
     fi
 }
 
