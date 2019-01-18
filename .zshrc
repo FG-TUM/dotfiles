@@ -12,7 +12,8 @@ ZSH_THEME="cypher"
 #if not ssh session
 if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
     # If not already running tmux start tmux
-    [[ -z "$TMUX"  ]] && exec tmux -u
+    # [[ -z "$TMUX"  ]] && exec tmux -u
+    [[ -z "$TMUX"  ]] && exec ${HOME}/work/software/tmux/buildDir/bin/tmux -u new-session -c ${HOME}
 fi
 
 
@@ -85,9 +86,10 @@ ${HOME}/work/software/LanguageTool-4.0/bin
 ${HOME}/work/workspace/GROMACS/gromacs-2018/install/bin
 ${HOME}/work/software/ParaView-5.5.0-RC3-Qt5-MPI-Linux-64bit/bin
 ${HOME}/work/software/vmd-1.9.3/installDir/bin
-${HOME}/work/software/cmake-3.11.1/install/bin
+${HOME}/work/software/cmake-3.13.2/install/bin
 ${HOME}/work/software/cheatsheet/
 ${HOME}/.local/share/JetBrains/Toolbox/bin
+${HOME}/work/software/tmux/buildDir/bin
 $PATH
 EOF`
 
@@ -104,7 +106,7 @@ EOF`
 source /home/software/intel/compilers_and_libraries/linux/bin/compilervars.sh intel64
 source /home/software/intel/vtune_amplifier_xe_2017.2.0.499904/amplxe-vars.zsh >/dev/null
 #export INTEL_LICENSE_FILE=~/Licenses/
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="${HOME}/work/software/tmux/buildDir/share/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -144,6 +146,7 @@ alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 alias yed="java -jar ${HOME}/work/software/yed/yed-3.18.1/yed.jar"
+alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
 
 # necessary thanks to JetBrains-toolbox
 clion() {
@@ -266,6 +269,7 @@ decrypt()
         rm ${payload%%.gpg}
     fi
 }
+
 
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
