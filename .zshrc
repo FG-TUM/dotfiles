@@ -102,9 +102,8 @@ $LD_LIBRARY_PATH
 #user added
 EOF`
 
-# load icc
-source /home/software/intel/compilers_and_libraries/linux/bin/compilervars.sh intel64
-source /home/software/intel/vtune_amplifier_xe_2017.2.0.499904/amplxe-vars.zsh >/dev/null
+# load icc and parallel studio stuff
+source /home/software/intel_2019_u1/parallel_studio_xe_2019.1.053/bin/psxevars.sh >/dev/null
 #export INTEL_LICENSE_FILE=~/Licenses/
 export MANPATH="${HOME}/work/software/tmux/buildDir/share/man:$MANPATH"
 
