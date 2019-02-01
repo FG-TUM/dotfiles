@@ -63,6 +63,18 @@ source $ZSH/oh-my-zsh.sh
 #eval $(thefuck --alias)
 eval $(gpg-agent --daemon > /dev/null 2>&1)
 
+# source ${HOME}/work/software/cheatsheet/zsh_completion.sh
+# COMPLETION SETTINGS
+# add custom completion scripts
+fpath=(~/.oh-my-zsh/custom/completions $fpath) 
+
+# compsys initialization
+autoload -U compinit
+compinit
+
+# show completion menu when number of options is at least 2
+zstyle ':completion:*' menu select=2
+
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
 #user added
