@@ -66,7 +66,7 @@ eval $(thefuck --alias)
 # source ${HOME}/work/software/cheatsheet/zsh_completion.sh
 # COMPLETION SETTINGS
 # add custom completion scripts
-fpath=(~/.oh-my-zsh/custom/completions $fpath) 
+fpath=(~/.oh-my-zsh/custom/completions $fpath)
 
 # compsys initialization
 autoload -U compinit
