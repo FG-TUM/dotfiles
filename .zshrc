@@ -200,3 +200,9 @@ cleanTeX()
 }
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
+
+
+sshd_status=$(service ssh status)
+if [[ $sshd_status = *"is not running"* ]]; then
+  sudo service ssh --full-restart
+fi
