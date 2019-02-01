@@ -54,13 +54,14 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux archlinux-patch common-aliases colored-man-pages git mvn nyan systemd zsh-navigation-tools)
+plugins=(common-aliases colored-man-pages git mvn systemd ubuntu zsh-navigation-tools)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 #eval $(thefuck --alias)
+eval $(gpg-agent --daemon > /dev/null 2>&1)
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
@@ -102,6 +103,8 @@ EOF`
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 export GPG_TTY=$(tty)
+alias gpg=gpg2
+
 
 # vi input mode
 #set -o vi
