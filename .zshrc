@@ -190,8 +190,13 @@ cleanTeX()
     direcory=${direcory%/}
 
     rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.bbl        > /dev/null 2>&1
+    rm -f ${direcory}/*.blg        > /dev/null 2>&1
     rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.ent        > /dev/null 2>&1
     rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.lof        > /dev/null 2>&1
+    rm -f ${direcory}/*.lot        > /dev/null 2>&1
     rm -f ${direcory}/*.nav        > /dev/null 2>&1
     rm -f ${direcory}/*.out        > /dev/null 2>&1
     rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
