@@ -14,8 +14,8 @@ _arguments -n -s -S \
     "--functor: :(lennard-jones lennard-jones-AVX2)"\
     "--help: :"\
     "--iterations: :"\
+    "--newton3: :(enabled disabled)"\
     "--no-flops: :"\
-    "--no-newton3: :"\
     "--particles-generator: :(grid uniform gaussian)"\
     "--particles-per-dimension: :"\
     "--particle-spacing: :"\
@@ -25,6 +25,7 @@ _arguments -n -s -S \
     "--tuning-interval: :"\
     "--tuning-samples: :"\
     "--log-level: :(trace debug info warn err critical off)"\
+    "--log-file: :"\
     "--verlet-rebuild-frequency: :"\
     "--verlet-skin-radius: :"\
     "--vtk: :"
