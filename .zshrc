@@ -154,6 +154,14 @@ export GTEST_COLOR=1
 
 export plot="${HOME}/work/workspace/AutoPas/examples/md-flexible/plotScript.gp"
 
+if [ -x /usr/local/cuda/bin/nvcc ]
+then
+    export PATH=$PATH:/usr/local/cuda/bin
+    export CUDADIR=/usr/local/cuda
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+fi
+
+
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
