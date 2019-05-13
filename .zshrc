@@ -114,6 +114,15 @@ $LD_LIBRARY_PATH
 #user added
 EOF`
 
+# activate this when using mls templates
+# export TEXMFHOME=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ";" -s
+# $TEXMFHOME
+# ${HOME}/texmf
+# /usr/share/texmf
+# #user added
+# /home/LATEX/texmf
+# EOF`
+
 # load icc and parallel studio stuff
 source /home/software/intel_2019_u1/parallel_studio_xe_2019.1.053/bin/psxevars.sh >/dev/null
 #export INTEL_LICENSE_FILE=~/Licenses/
