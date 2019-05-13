@@ -55,7 +55,18 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases colored-man-pages docker git gpg-agent gradle mvn systemd ubuntu zsh-navigation-tools)
+plugins=(
+    common-aliases
+    colored-man-pages
+    docker
+    git
+    gpg-agent
+    gradle
+    mvn
+    systemd
+    ubuntu
+    zsh-navigation-tools
+)
 
 source $ZSH/oh-my-zsh.sh
 
