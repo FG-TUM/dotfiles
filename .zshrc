@@ -248,8 +248,10 @@ cleanTeX()
 
     rm -f ${direcory}/*.aux        > /dev/null 2>&1
     rm -f ${direcory}/*.bbl        > /dev/null 2>&1
+    rm -f ${direcory}/*.bcf        > /dev/null 2>&1
     rm -f ${direcory}/*.blg        > /dev/null 2>&1
     rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.ent        > /dev/null 2>&1
     rm -f ${direcory}/*.log        > /dev/null 2>&1
     rm -f ${direcory}/*.lof        > /dev/null 2>&1
     rm -f ${direcory}/*.lot        > /dev/null 2>&1
@@ -257,6 +259,7 @@ cleanTeX()
     rm -f ${direcory}/*.out        > /dev/null 2>&1
     rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
     rm -f ${direcory}/*.ps         > /dev/null 2>&1
+    rm -f ${direcory}/*.run.xml    > /dev/null 2>&1
     rm -f ${direcory}/*.snm        > /dev/null 2>&1
     rm -f ${direcory}/*.synctex.gz > /dev/null 2>&1
     rm -f ${direcory}/*.toc        > /dev/null 2>&1
