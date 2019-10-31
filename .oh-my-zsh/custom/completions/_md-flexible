@@ -5,27 +5,31 @@ local context state line
 
 _arguments -n -s -S \
     "--box-length: :"\
-    "--container: :(linked-cells verletLists directSumContainer)"\
-    "--container-selector-strategy: :(fastestAbs fastestMean fastestMedian)"\
+    "--cell-size: :" \
+    "--container: :(directSum linked-cells verletLists verletListsCells verletClusterLists verletClusterCells varVerletListsAsBuilt)"\
     "--cutoff: :"\
-    "--data-layout: :(aos soa)"\
+    "--data-layout: :(aos soa cuda)"\
     "--distribution-mean: :"\
     "--distribution-stddeviation: :"\
-    "--functor: :(lennard-jones lennard-jones-AVX2)"\
+    "--functor: :(lennard-jones lennard-jones-AVX2 lennard-jones-globals)"\
     "--help: :"\
     "--iterations: :"\
+    "--log-file: :"\
+    "--log-level: :(trace debug info warn err critical off)"\
     "--newton3: :(enabled disabled)"\
     "--no-flops: :"\
-    "--particles-generator: :(grid uniform gaussian)"\
     "--particles-per-dimension: :"\
+    "--particle-generator: :(grid uniform gaussian sphere)"\
     "--particle-spacing: :"\
     "--particles-total: :"\
-    "--traversal: :(c08 sliced directSumTraversal)"\
-    "--traversal-selector-strategy: :(fastestAbs fastestMean fastestMedian)"\
+    "--selector-strategy: :(fastestAbs fastestMean fastestMedian)"\
+    "--traversal: :(c08 sliced c18 c01 directSum verlet-sliced verlet-c18 verlet-c01 cuda-c01 verlet-lists c01-combined-SoA verlet-clusters c04 var-verlet-lists-as-build verlet-clusters-coloring c04SoA verlet-cluster-cells)"\
     "--tuning-interval: :"\
     "--tuning-samples: :"\
-    "--log-level: :(trace debug info warn err critical off)"\
-    "--log-file: :"\
+    "--tuning-strategy: :(fullSearch bayesian)"\
+    "--verlet-cluster-size: :"\
     "--verlet-rebuild-frequency: :"\
     "--verlet-skin-radius: :"\
-    "--vtk: :"
+    "--vtk-filename: :"\
+    "--vtk-write-frequency: :"\
+    "--yaml-filename: :"
