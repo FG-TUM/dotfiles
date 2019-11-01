@@ -124,9 +124,6 @@ EOF`
 # /home/LATEX/texmf
 # EOF`
 
-# load icc and parallel studio stuff
-# source /home/software/intel_2019_u1/parallel_studio_xe_2019.1.053/bin/psxevars.sh >/dev/null
-#export INTEL_LICENSE_FILE=~/Licenses/
 export MANPATH="${HOME}/work/software/tmux/buildDir/share/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -176,6 +173,11 @@ alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 alias yed="java -jar ${HOME}/work/software/yed/yed-3.18.1/yed.jar"
 alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
+# load icc and parallel studio stuff
+loadIntelStuff() {
+    source /home/software/intel_2019_u4/bin/compilervars.sh intel64
+    echo "To use the right libraries call icpc with -gcc-name=gcc-7"
+}
 
 # necessary thanks to JetBrains-toolbox
 clion() {
