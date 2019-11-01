@@ -173,6 +173,8 @@ alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 alias yed="java -jar ${HOME}/work/software/yed/yed-3.18.1/yed.jar"
 alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
+alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint:latest"
+
 # load icc and parallel studio stuff
 loadIntelStuff() {
     source /home/software/intel_2019_u4/bin/compilervars.sh intel64
