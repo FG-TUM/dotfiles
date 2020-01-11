@@ -71,6 +71,7 @@ $PATH
 ~/.cabal/bin
 # ~/workspace/android-sdks/tools
 $(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
+${HOME}/workspace/kokkos/bin/
 EOF`
 #$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
 #$(\ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/linux/bin/intel64
