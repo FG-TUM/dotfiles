@@ -123,6 +123,9 @@ alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
+alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
+alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint"
+
 # necessary thanks to JetBrains-toolbox
 clion() {
     $(find /opt/JetBrains/apps/CLion -name 'clion.sh' | head -n 1) $@
