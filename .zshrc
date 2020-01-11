@@ -54,7 +54,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux archlinux-patch cabal cargo common-aliases colored-man-pages git mvn rust svn systemd zsh-navigation-tools)
+plugins=(archlinux archlinux-patch cabal cargo common-aliases colored-man-pages docker git mvn rust svn systemd zsh-navigation-tools)
 
 source $ZSH/oh-my-zsh.sh
 
