@@ -20,8 +20,8 @@ let g:NERDAltDelims_haskell = 1
 let g:pymode_python = 'python3'
 
 " fast buffer cycling
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+nnoremap <Tab> :bnext<CR>zR
+nnoremap <S-Tab> :bprevious<CR>zR
 
 "shortcut for running the current script in the shell
 nnoremap <leader>r :w\|!%:p<Enter>
