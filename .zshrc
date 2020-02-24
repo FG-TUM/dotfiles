@@ -104,9 +104,14 @@ ${HOME}/work/software/oni/dist/linux-unpacked/
 $PATH
 EOF`
 
+# export TERM=xterm-256color
+# export TERM=xterm
+
 export JAVA_HOME=/usr/lib/jvm/default-java
 export GOPATH=${HOME}/work/software/gocode
 export VIMRC=${HOME}/.vimrc
+
+export LC_TIME="de_DE.utf8"
 
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
@@ -129,7 +134,7 @@ export MANPATH="${HOME}/work/software/tmux/buildDir/share/man:$MANPATH"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+  export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
