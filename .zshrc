@@ -54,25 +54,44 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux archlinux-patch cabal cargo common-aliases colored-man-pages docker git mvn rust svn systemd zsh-navigation-tools)
+plugins=(
+    archlinux
+    cabal
+    cargo
+    common-aliases
+    colored-man-pages
+    docker
+    git
+    mvn
+    rust
+    svn
+    systemd
+    zsh-navigation-tools
+)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-eval $(thefuck --alias)
+# reload completions (necessary for pacaur completion)
+autoload -U compinit && compinit
+
+# eval $(thefuck --alias)
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
 #user added
-# ~/software/paraview/install/bin/
-~/software/gocode/bin
-# ~/software/dock
-~/.cabal/bin
-# ~/workspace/android-sdks/tools
-$(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
-${HOME}/workspace/kokkos/bin/
+${HOME}/software/idea
+# ${HOME}/software/paraview/install/bin
+# ${HOME}/software/gocode/bin
+# ${HOME}/.cabal/bin
+# ${HOME}/workspace/android-sdks/tools
+# ${HOME}/workspace/kokkos/bin
+${HOME}/.gem/ruby/2.7.0/gems/mdless-1.0.10/bin
+${HOME}/.local/bin
+${HOME}/software/plotly-orca
 EOF`
+#$(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
 #$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
 #$(\ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/linux/bin/intel64
 #$(\ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
@@ -95,7 +114,7 @@ EOF`
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+export EDITOR='/usr/bin/vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -125,15 +144,18 @@ alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
 alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint"
+alias vimrc='${=EDITOR} ~/.vimrc' 
+alias tmux.conf='${=EDITOR} ~/.tmux.conf' 
+alias mdless='mdless 2>/dev/null'
 
 # necessary thanks to JetBrains-toolbox
-clion() {
-    $(find /opt/JetBrains/apps/CLion -name 'clion.sh' | head -n 1) $@
-}
-
-intellij() {
-    $(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
-}
+#clion() {
+#    $(find /opt/JetBrains/apps/CLion -name 'clion.sh' | head -n 1) $@
+#}
+# 
+# intellij() {
+#     $(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
+# }
 
 
 # ONLY NECESSARY WITH OLD VERSIONS OF TEXSTUDIO / LANGUAGETOOL
