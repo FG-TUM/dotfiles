@@ -59,11 +59,7 @@ plugins=(
     common-aliases
     colored-man-pages
     docker
-    git
     gpg-agent
-    gradle
-    mvn
-    systemd
     ubuntu
     zsh-navigation-tools
 )
@@ -72,7 +68,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-eval $(thefuck --alias)
+# this slows zsh down considerably
+# eval $(thefuck --alias)
 
 # source ${HOME}/work/software/cheatsheet/zsh_completion.sh
 # COMPLETION SETTINGS
