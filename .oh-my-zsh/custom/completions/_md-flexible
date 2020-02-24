@@ -6,6 +6,7 @@ local context state line
 _arguments -n -s -S \
     "--box-length: :"\
     "--cell-size: :" \
+    "--checkpoint: :" \
     "--container: :(directSum linked-cells verletLists verletListsCells verletClusterLists verletClusterCells varVerletListsAsBuilt)"\
     "--cutoff: :"\
     "--data-layout: :(aos soa cuda)"\
