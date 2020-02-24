@@ -69,6 +69,7 @@ set clipboard=unnamed,unnamedplus
 set ignorecase                          " search is case insensitive
 set smartcase                           " if needle contains uppercase -> search case sensitive
 set hlsearch                            " highlight search results
+set incsearch                           " highlighing starts while typing
 
 " Spellcheck 
 set spell                               " Enable spellchecker -> z=
