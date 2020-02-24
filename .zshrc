@@ -94,12 +94,13 @@ ${HOME}/work/software/LanguageTool-4.0/bin
 ${HOME}/work/workspace/GROMACS/gromacs-2018/install/bin
 ${HOME}/work/software/ParaView-5.5.0-RC3-Qt5-MPI-Linux-64bit/bin
 ${HOME}/work/software/vmd-1.9.3/installDir/bin
-${HOME}/work/software/cmake-3.15.1/install/bin
+${HOME}/work/software/CMake/build/bin
 ${HOME}/work/software/cheatsheet/
 ${HOME}/.local/bin
 ${HOME}/.local/share/JetBrains/Toolbox/bin
 ${HOME}/work/software/tmux/buildDir/bin
 ${HOME}/work/software/doxygen/myBuild/bin
+${HOME}/work/software/oni/dist/linux-unpacked/
 $PATH
 EOF`
 
