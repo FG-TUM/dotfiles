@@ -57,6 +57,8 @@ set statusline+=\ %p%%                  " Right aligned file nav info
 
 set autochdir                           " always set working dir to current file
 
+set hidden                              " allow buffer switching without saving
+
 " Persistent undo (undo after reopening file)
 set undofile                            " So is persistent undo ...
 set undolevels=1000                     " Maximum number of changes that can be undone
