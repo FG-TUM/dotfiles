@@ -100,7 +100,8 @@ ${HOME}/.local/bin
 ${HOME}/.local/share/JetBrains/Toolbox/bin
 ${HOME}/work/software/tmux/buildDir/bin
 ${HOME}/work/software/doxygen/myBuild/bin
-${HOME}/work/software/oni/dist/linux-unpacked/
+${HOME}/work/software/oni/dist/linux-unpacked
+${HOME}/work/software/tmux-helper
 $PATH
 EOF`
 
