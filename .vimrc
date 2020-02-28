@@ -1,3 +1,4 @@
+let mapleader = ','
 " --------------------------------------- Plugins -----------------------------------------
 
 filetype plugin indent on               " automatically detect file types
@@ -53,7 +54,6 @@ set statusline+=%-8.(%l,%c%V%)          " Line and col info with offsets
 set statusline+=\ %p%%                  " Right aligned file nav info
 
 " -------------------------------------- Convenience ---------------------------------------
-let mapleader = ','
 
 set autochdir                           " always set working dir to current file
 
@@ -88,7 +88,6 @@ autocmd BufRead,BufNewFile *.gp set filetype=gnuplot
 let g:pymode_python = 'python3'
 
 " --------------------------------------- Shortcuts ----------------------------------------
-" -------------------------------------- Convenience ---------------------------------------
 " Shortcut for writing in a read only file
 cmap w!! w !sudo tee % >/dev/null
 
