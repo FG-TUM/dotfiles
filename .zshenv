@@ -14,6 +14,8 @@ alias less='less -i'
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
 alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint:latest"
+alias vimrc='${=EDITOR} ~/.vimrc'
+
 
 # kill all incoming ssh connections
 kickSSHIntruders() {
