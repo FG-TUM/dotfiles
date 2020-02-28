@@ -61,8 +61,11 @@ set hidden                              " allow buffer switching without saving
 
 " Persistent undo (undo after reopening file)
 set undofile                            " So is persistent undo ...
+set undodir=$HOME/.vim/tmp//            " location where to store the undo files
 set undolevels=1000                     " Maximum number of changes that can be undone
 set undoreload=10000                    " Maximum number lines to save for undo on a buffer reload
+
+set directory=$HOME/.vim/tmp//          " location where to store the swap files
 
 " Set clipboard to use system clipboard (needs +clipboard)
 set clipboard=unnamed,unnamedplus
