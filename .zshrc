@@ -54,7 +54,13 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases colored-man-pages git mvn systemd ubuntu zsh-navigation-tools)
+plugins=(
+    common-aliases
+    colored-man-pages
+    docker
+    ubuntu
+    zsh-navigation-tools
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -63,10 +69,9 @@ source $ZSH/oh-my-zsh.sh
 #eval $(thefuck --alias)
 eval $(gpg-agent --daemon > /dev/null 2>&1)
 
-# source ${HOME}/work/software/cheatsheet/zsh_completion.sh
 # COMPLETION SETTINGS
 # add custom completion scripts
-fpath=(~/.oh-my-zsh/custom/completions $fpath) 
+fpath=(~/.oh-my-zsh/custom/completions $fpath)
 
 # compsys initialization
 autoload -U compinit
@@ -76,13 +81,16 @@ compinit
 zstyle ':completion:*' menu select=2
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
-$PATH
 #user added
 #~/.cabal/bin
 # $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
+${HOME}/software/CMake/build/bin
+${HOME}/workspace/flutter/bin
+#defaults
+$PATH
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
