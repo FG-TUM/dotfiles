@@ -54,13 +54,25 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux archlinux-patch common-aliases colored-man-pages git mvn nyan systemd zsh-navigation-tools)
+plugins=(
+    common-aliases
+    colored-man-pages
+    git
+    systemd
+    zsh-navigation-tools
+)
+# interesting plugins:
+#    archlinux 
+#    archlinux-patch
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# User configuration:
 
-#eval $(thefuck --alias)
+# reload completions (necessary for pacaur completion)
+autoload -U compinit && compinit
+
+# eval $(thefuck --alias)
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
@@ -73,6 +85,8 @@ $PATH
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
+export ANDROID_HOME=${HOME}/software/Android/Sdk
+export CHROME_EXECUTABLE=/usr/bin/chromium
 export GOPATH=/home/${USER}/software/gocode
 export VIMRC=/home/${USER}/.vimrc
 
@@ -90,7 +104,7 @@ EOF`
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+export EDITOR='/usr/bin/vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -111,23 +125,16 @@ export GPG_TTY=$(tty)
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
-#alias vivaldi="vivaldi-stable"
-#alias paraview="optirun paraview"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
-# necessary thanks to JetBrains-toolbox
-clion() {
-    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh' | head -n 1) $@
-}
-
-intellij() {
-    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
-}
-
-export ws=~/work/workspace/
+alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
+alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint"
+alias vimrc='${=EDITOR} ~/.vimrc' 
+alias tmux.conf='${=EDITOR} ~/.tmux.conf' 
+alias mdless='mdless 2>/dev/null'
 
 # ONLY NECESSARY WITH OLD VERSIONS OF TEXSTUDIO / LANGUAGETOOL
 # starts languagetool server if available and texstudio and terminates all processes on return
@@ -188,8 +195,13 @@ cleanTeX()
     direcory=${direcory%/}
 
     rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.bbl        > /dev/null 2>&1
+    rm -f ${direcory}/*.blg        > /dev/null 2>&1
     rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.ent        > /dev/null 2>&1
     rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.lof        > /dev/null 2>&1
+    rm -f ${direcory}/*.lot        > /dev/null 2>&1
     rm -f ${direcory}/*.nav        > /dev/null 2>&1
     rm -f ${direcory}/*.out        > /dev/null 2>&1
     rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1

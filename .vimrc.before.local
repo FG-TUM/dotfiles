@@ -1,3 +1,0 @@
-" do not change dir when opening new buffer
-let g:spf13_no_autochdir = 1
-
