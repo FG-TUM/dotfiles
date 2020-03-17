@@ -55,24 +55,19 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    archlinux
-    cabal
-    cargo
     common-aliases
     colored-man-pages
-    docker
-    flutter
     git
-    mvn
-    rust
-    svn
     systemd
     zsh-navigation-tools
 )
+# interesting plugins:
+#    archlinux 
+#    archlinux-patch
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# User configuration:
 
 # reload completions (necessary for pacaur completion)
 autoload -U compinit && compinit
@@ -82,21 +77,12 @@ autoload -U compinit && compinit
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $PATH
 #user added
-${HOME}/software/idea
-# ${HOME}/software/paraview/install/bin
-# ${HOME}/software/gocode/bin
-# ${HOME}/.cabal/bin
-# ${HOME}/workspace/android-sdks/tools
-# ${HOME}/workspace/kokkos/bin
-${HOME}/.gem/ruby/2.7.0/gems/mdless-1.0.10/bin
-${HOME}/.local/bin
-${HOME}/software/plotly-orca
-${HOME}/software/flutter/bin
+#~/.cabal/bin
+# $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
+# $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 EOF`
-#$(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
-#$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
-#$(\ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/linux/bin/intel64
-#$(\ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 
 export JAVA_HOME=/usr/lib/jvm/default
 export ANDROID_HOME=${HOME}/software/Android/Sdk
@@ -139,8 +125,6 @@ export GPG_TTY=$(tty)
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
-# alias vivaldi="vivaldi-stable"
-# alias paraview="optirun paraview"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
@@ -151,16 +135,6 @@ alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint"
 alias vimrc='${=EDITOR} ~/.vimrc' 
 alias tmux.conf='${=EDITOR} ~/.tmux.conf' 
 alias mdless='mdless 2>/dev/null'
-
-# necessary thanks to JetBrains-toolbox
-#clion() {
-#    $(find /opt/JetBrains/apps/CLion -name 'clion.sh' | head -n 1) $@
-#}
-# 
-# intellij() {
-#     $(find /opt/JetBrains/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
-# }
-
 
 # ONLY NECESSARY WITH OLD VERSIONS OF TEXSTUDIO / LANGUAGETOOL
 # starts languagetool server if available and texstudio and terminates all processes on return
@@ -211,6 +185,7 @@ shrinkImage()
 grepPDF()
 {
     find ${2:-\.} -name '*.pdf' -exec sh -c "pdftotext '{}' - | grep --with-filename --label='{}' --color --ignore-case '${1}'" \;
+
 }
 
 cleanTeX()
