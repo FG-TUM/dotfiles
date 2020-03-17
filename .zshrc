@@ -64,24 +64,35 @@ plugins=(
 # interesting plugins:
 #    archlinux 
 #    archlinux-patch
+#    docker
+#    ubuntu
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration:
 
-# reload completions (necessary for pacaur completion)
-autoload -U compinit && compinit
+#eval $(gpg-agent --daemon > /dev/null 2>&1)
 
-# eval $(thefuck --alias)
+
+# COMPLETION SETTINGS
+# add custom completion scripts
+#fpath=(~/.oh-my-zsh/custom/completions $fpath)
+# compsys initialization
+autoload -U compinit && compinit
+# show completion menu when number of options is at least 2
+#zstyle ':completion:*' menu select=2
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
-$PATH
 #user added
 #~/.cabal/bin
 # $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
+${HOME}/software/CMake/build/bin
+${HOME}/workspace/flutter/bin
+#defaults
+$PATH
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
@@ -105,6 +116,7 @@ EOF`
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 export EDITOR='/usr/bin/vim'
+export VISUAL="$EDITOR"
 # else
 #   export EDITOR='mvim'
 # fi
@@ -116,6 +128,8 @@ export EDITOR='/usr/bin/vim'
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 export GPG_TTY=$(tty)
+alias gpg=gpg2
+
 
 # vi input mode
 #set -o vi
@@ -128,7 +142,7 @@ alias jobs="jobs -l"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
-alias ocaml="rlwrap ocaml"
+# alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
 alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint"
@@ -213,3 +227,9 @@ cleanTeX()
 }
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
+
+
+sshd_status=$(service ssh status)
+if [[ $sshd_status = *"is not running"* ]]; then
+  sudo service ssh --full-restart
+fi

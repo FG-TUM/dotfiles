@@ -54,7 +54,6 @@ set statusline+=%-8.(%l,%c%V%)          " Line and col info with offsets
 set statusline+=\ %p%%                  " Right aligned file nav info
 
 " -------------------------------------- Convenience ---------------------------------------
-
 set backspace=indent,eol,start          " make backspace work as expected
 
 set autochdir                           " always set working dir to current file
@@ -107,4 +106,3 @@ nnoremap <S-Tab> :bprevious<CR>zR
 
 "shortcut for running the current script in the shell
 nnoremap <leader>r :w\|!%:p<Enter>
-
