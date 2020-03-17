@@ -57,28 +57,30 @@ fi
 plugins=(
     common-aliases
     colored-man-pages
-    docker
-    ubuntu
+    git
+    systemd
     zsh-navigation-tools
 )
+# interesting plugins:
+#    archlinux 
+#    archlinux-patch
+#    docker
+#    ubuntu
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# User configuration:
 
-#eval $(thefuck --alias)
-eval $(gpg-agent --daemon > /dev/null 2>&1)
+#eval $(gpg-agent --daemon > /dev/null 2>&1)
+
 
 # COMPLETION SETTINGS
 # add custom completion scripts
-fpath=(~/.oh-my-zsh/custom/completions $fpath)
-
+#fpath=(~/.oh-my-zsh/custom/completions $fpath)
 # compsys initialization
-autoload -U compinit
-compinit
-
+autoload -U compinit && compinit
 # show completion menu when number of options is at least 2
-zstyle ':completion:*' menu select=2
+#zstyle ':completion:*' menu select=2
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 #user added
@@ -94,6 +96,8 @@ $PATH
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
+export ANDROID_HOME=${HOME}/software/Android/Sdk
+export CHROME_EXECUTABLE=/usr/bin/chromium
 export GOPATH=/home/${USER}/software/gocode
 export VIMRC=/home/${USER}/.vimrc
 
@@ -109,8 +113,13 @@ EOF`
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='vim'
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+export EDITOR='/usr/bin/vim'
 export VISUAL="$EDITOR"
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -130,23 +139,16 @@ alias gpg=gpg2
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
-#alias vivaldi="vivaldi-stable"
-#alias paraview="optirun paraview"
 alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
 alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 # alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
-# necessary thanks to JetBrains-toolbox
-# clion() {
-    # $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh' | head -n 1) $@
-# }
-
-# intellij() {
-    # $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/IDEA-U -name 'idea.sh' | head -n 1) $@
-# }
-
-export ws=~/work/workspace/
+alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
+alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint"
+alias vimrc='${=EDITOR} ~/.vimrc' 
+alias tmux.conf='${=EDITOR} ~/.tmux.conf' 
+alias mdless='mdless 2>/dev/null'
 
 # ONLY NECESSARY WITH OLD VERSIONS OF TEXSTUDIO / LANGUAGETOOL
 # starts languagetool server if available and texstudio and terminates all processes on return
@@ -207,8 +209,13 @@ cleanTeX()
     direcory=${direcory%/}
 
     rm -f ${direcory}/*.aux        > /dev/null 2>&1
+    rm -f ${direcory}/*.bbl        > /dev/null 2>&1
+    rm -f ${direcory}/*.blg        > /dev/null 2>&1
     rm -f ${direcory}/*.dvi        > /dev/null 2>&1
+    rm -f ${direcory}/*.ent        > /dev/null 2>&1
     rm -f ${direcory}/*.log        > /dev/null 2>&1
+    rm -f ${direcory}/*.lof        > /dev/null 2>&1
+    rm -f ${direcory}/*.lot        > /dev/null 2>&1
     rm -f ${direcory}/*.nav        > /dev/null 2>&1
     rm -f ${direcory}/*.out        > /dev/null 2>&1
     rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1

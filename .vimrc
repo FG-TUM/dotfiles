@@ -1,3 +1,4 @@
+let mapleader = ','
 " --------------------------------------- Plugins -----------------------------------------
 
 filetype plugin indent on               " automatically detect file types
@@ -28,8 +29,7 @@ colorscheme torte
 
 set number                              " Line numbers
 
-set showcmd                             " Show Buttons pressed in normal
-mode
+set showcmd                             " Show Buttons pressed in normal mode
 
 " Formatting stuff
 set autoindent                          " Indent at the same level of the previous line
@@ -54,14 +54,19 @@ set statusline+=%-8.(%l,%c%V%)          " Line and col info with offsets
 set statusline+=\ %p%%                  " Right aligned file nav info
 
 " -------------------------------------- Convenience ---------------------------------------
-let mapleader = ','
+set backspace=indent,eol,start          " make backspace work as expected
 
 set autochdir                           " always set working dir to current file
 
+set hidden                              " allow buffer switching without saving
+
 " Persistent undo (undo after reopening file)
 set undofile                            " So is persistent undo ...
+set undodir=$HOME/.vim/tmp//            " location where to store the undo files
 set undolevels=1000                     " Maximum number of changes that can be undone
 set undoreload=10000                    " Maximum number lines to save for undo on a buffer reload
+
+set directory=$HOME/.vim/tmp//          " location where to store the swap files
 
 " Set clipboard to use system clipboard (needs +clipboard)
 set clipboard=unnamed,unnamedplus
@@ -70,12 +75,12 @@ set clipboard=unnamed,unnamedplus
 set ignorecase                          " search is case insensitive
 set smartcase                           " if needle contains uppercase -> search case sensitive
 set hlsearch                            " highlight search results
-set incsearch                           " highlighing starts while typing
+set incsearch                           " highlighting starts while typing
 
 " Spellcheck 
 set spell                               " Enable spellchecker -> z=
-highlight clear SpellBad                " Clear misspell style
-highlight SpellBad cterm=underline      " Underline misspells
+highlight clear SpellBad                       " Clear misspell style
+highlight SpellBad cterm=underline             " Underline misspells
 set spelllang=en,de
 
 " Since makefiles depend on tabs do not expand them there
