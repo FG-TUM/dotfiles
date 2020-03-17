@@ -55,6 +55,8 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    docker
+    ubuntu
     common-aliases
     colored-man-pages
     git
@@ -64,8 +66,6 @@ plugins=(
 # interesting plugins:
 #    archlinux 
 #    archlinux-patch
-#    docker
-#    ubuntu
 
 source $ZSH/oh-my-zsh.sh
 
