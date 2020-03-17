@@ -61,6 +61,7 @@ plugins=(
     common-aliases
     colored-man-pages
     docker
+    flutter
     git
     mvn
     rust
@@ -90,6 +91,7 @@ ${HOME}/software/idea
 ${HOME}/.gem/ruby/2.7.0/gems/mdless-1.0.10/bin
 ${HOME}/.local/bin
 ${HOME}/software/plotly-orca
+${HOME}/software/flutter/bin
 EOF`
 #$(\ls -dt /opt/intel/inspector* | head -n 1)/bin64
 #$(\ls -dt /opt/intel/advisor* | head -n 1)/bin64
@@ -97,6 +99,8 @@ EOF`
 #$(\ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 
 export JAVA_HOME=/usr/lib/jvm/default
+export ANDROID_HOME=${HOME}/software/Android/Sdk
+export CHROME_EXECUTABLE=/usr/bin/chromium
 export GOPATH=/home/${USER}/software/gocode
 export VIMRC=/home/${USER}/.vimrc
 
