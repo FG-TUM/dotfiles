@@ -6,13 +6,13 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="cypher"
-
+TMUX_DIR="${HOME}/software/tmux/buildDir/bin"
 # If not running interactively, do not do anything
 [[ $- != *i*  ]] && return
 #if not ssh session
 if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
     # If not already running tmux start tmux
-    [[ -z "$TMUX"  ]] && exec tmux -u
+    [[ -z "$TMUX"  ]] && exec ${TMUX_DIR}/tmux -u
 fi
 
 
@@ -91,6 +91,7 @@ export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 ${HOME}/software/CMake/build/bin
 ${HOME}/workspace/flutter/bin
+${TMUX_DIR}
 #defaults
 $PATH
 EOF`
@@ -128,7 +129,7 @@ export VISUAL="$EDITOR"
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 export GPG_TTY=$(tty)
-alias gpg=gpg2
+# alias gpg=gpg2
 
 
 # vi input mode
