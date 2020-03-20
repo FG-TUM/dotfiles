@@ -135,6 +135,8 @@ export GPG_TTY=$(tty)
 # vi input mode
 #set -o vi
 
+# Windows programs
+alias foxit="'/mnt/c/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe'"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
