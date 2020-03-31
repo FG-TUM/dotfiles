@@ -1,3 +1,6 @@
+# If not running interactively, do not do anything
+[[ $- != *i*  ]] && return
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -7,12 +10,20 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="cypher"
 TMUX_DIR="${HOME}/software/tmux/buildDir/bin"
-# If not running interactively, do not do anything
-[[ $- != *i*  ]] && return
+TMUX_EXE="${TMUX_DIR}/tmux"
 #if not ssh session
 if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
-    # If not already running tmux start tmux
-    [[ -z "$TMUX"  ]] && exec ${TMUX_DIR}/tmux -u
+    # If not already running tmux start tmux. Attach to existing session if possible
+    if [[ -z "$TMUX"  ]]; then
+        ${TMUX_EXE} ls
+        if [[ "$?" == "1" ]]; then
+            echo "NEW"
+            exec ${TMUX_EXE} -u
+        else
+            echo "ATTACH"
+            exec ${TMUX_EXE} -u attach 
+        fi
+    fi
 fi
 
 
@@ -137,6 +148,7 @@ export GPG_TTY=$(tty)
 
 # Windows programs
 alias foxit="'/mnt/c/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe'"
+alias texstudio="'/mnt/c/Program Files (x86)/TeXstudio/texstudio.exe'"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
@@ -236,3 +248,4 @@ sshd_status=$(service ssh status)
 if [[ $sshd_status = *"is not running"* ]]; then
   sudo service ssh --full-restart
 fi
+
