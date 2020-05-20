@@ -87,7 +87,8 @@ source $ZSH/oh-my-zsh.sh
 
 # COMPLETION SETTINGS
 # add custom completion scripts
-#fpath=(~/.oh-my-zsh/custom/completions $fpath)
+fpath=(~/.oh-my-zsh/custom/completions $fpath)
+
 # compsys initialization
 autoload -U compinit && compinit
 # show completion menu when number of options is at least 2
@@ -236,6 +237,7 @@ cleanTeX()
     rm -f ${direcory}/*.pdfpc      > /dev/null 2>&1
     rm -f ${direcory}/*.ps         > /dev/null 2>&1
     rm -f ${direcory}/*.snm        > /dev/null 2>&1
+    rm -f ${direcory}/*.spl        > /dev/null 2>&1
     rm -f ${direcory}/*.synctex.gz > /dev/null 2>&1
     rm -f ${direcory}/*.toc        > /dev/null 2>&1
     rm -f ${direcory}/*.vrb        > /dev/null 2>&1
