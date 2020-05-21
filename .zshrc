@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 
 # COMPLETION SETTINGS
 # add custom completion scripts
-fpath=(~/.oh-my-zsh/custom/completions $fpath)
+fpath=(~/.oh-my-zsh/custom/completions ~/workspace/AutoPas/examples/md-flexible/completion/zsh $fpath)
 
 # compsys initialization
 autoload -U compinit && compinit
