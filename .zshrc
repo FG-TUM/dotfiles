@@ -55,19 +55,23 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    archlinux 
+    archlinux-patch
     common-aliases
     colored-man-pages
     git
     systemd
     zsh-navigation-tools
 )
-# interesting plugins:
-#    archlinux 
-#    archlinux-patch
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration:
+
+fpath=(
+    ~/.oh-my-zsh/custom/completions
+    $fpath
+)
 
 # reload completions (necessary for pacaur completion)
 autoload -U compinit && compinit
@@ -82,6 +86,7 @@ $PATH
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
+/home/seriously/.gem/ruby/2.7.0/bin
 EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default
@@ -135,6 +140,10 @@ alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint"
 alias vimrc='${=EDITOR} ~/.vimrc' 
 alias tmux.conf='${=EDITOR} ~/.tmux.conf' 
 alias mdless='mdless 2>/dev/null'
+
+clion () {
+    $(find ${HOME}/.local/share/JetBrains/Toolbox/apps/CLion -name 'clion.sh' | head -n 1) $@
+} 
 
 # ONLY NECESSARY WITH OLD VERSIONS OF TEXSTUDIO / LANGUAGETOOL
 # starts languagetool server if available and texstudio and terminates all processes on return
