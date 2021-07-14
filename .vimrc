@@ -52,6 +52,7 @@ set statusline+=%=                      " Start inserting from the right now
 set statusline+=[%Y]\                   " Filetype
 set statusline+=%-8.(%l,%c%V%)          " Line and col info with offsets
 set statusline+=\ %p%%                  " Right aligned file nav info
+set wildmenu                            " show auto complete choices
 
 " -------------------------------------- Convenience ---------------------------------------
 set backspace=indent,eol,start          " make backspace work as expected
