@@ -1,1 +1,2 @@
 XTerm*ptyInitialErase: true
+XTerm*selectToClipboard: true
