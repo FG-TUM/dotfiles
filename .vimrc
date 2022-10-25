@@ -13,7 +13,20 @@ Plug 'majutsushi/tagbar'
 " sa                add surroundings
 " sr                replace surroundings
 Plug 'machakann/vim-sandwich'
+" fzf fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
+
+" fzf mappings
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " remap tagbar
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
@@ -23,7 +36,6 @@ autocmd FileType c,cpp,cxx,h,hpp,hxx setlocal commentstring=//\ %s
 
 
 " ----------------------------------------- Style ------------------------------------------
-
 syntax on                               " Enable syntax highlighting
 colorscheme torte
 
@@ -89,7 +101,7 @@ autocmd FileType make setlocal noexpandtab
 autocmd BufRead,BufNewFile *.gp set filetype=gnuplot
 
 " In order to switch to python 2 delete compiled pyc files
-" Find ~/.vim/bundle/python-mode -name '*.pyc' -delete
+" find ~/.vim/bundle/python-mode -name '*.pyc' -delete
 let g:pymode_python = 'python3'
 
 " --------------------------------------- Shortcuts ----------------------------------------
