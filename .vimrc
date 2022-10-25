@@ -120,3 +120,12 @@ nnoremap <S-Tab> :bprevious<CR>zR
 
 "shortcut for running the current script in the shell
 nnoremap <leader>r :w\|!%:p<Enter>
+
+" Search and replace word under cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" Switch between .h and .cpp
+nnoremap <F10> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+
+" search for selected text via //
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
