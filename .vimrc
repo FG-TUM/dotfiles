@@ -64,8 +64,10 @@ set statusline+=%=                      " Start inserting from the right now
 set statusline+=[%Y]\                   " Filetype
 set statusline+=%-8.(%l,%c%V%)          " Line and col info with offsets
 set statusline+=\ %p%%                  " Right aligned file nav info
+set wildmenu                            " Show auto complete choices
 
 " -------------------------------------- Convenience ---------------------------------------
+set backspace=indent,eol,start          " make backspace work as expected
 
 set autochdir                           " always set working dir to current file
 
@@ -86,12 +88,13 @@ set clipboard=unnamed,unnamedplus
 set ignorecase                          " search is case insensitive
 set smartcase                           " if needle contains uppercase -> search case sensitive
 set hlsearch                            " highlight search results
-set incsearch                           " highlighing starts while typing
+set incsearch                           " highlighting starts while typing
+set iskeyword-=_                        " consider '_' as word delimiter
 
 " Spellcheck 
 set spell                               " Enable spellchecker -> z=
-highlight clear SpellBad                       " Clear misspell style
-highlight SpellBad cterm=underline             " Underline misspells
+highlight clear SpellBad                " Clear misspell style
+highlight SpellBad cterm=underline      " Underline misspells
 set spelllang=en,de
 
 " Since makefiles depend on tabs do not expand them there
@@ -109,7 +112,7 @@ let g:pymode_python = 'python3'
 cmap w!! w !sudo tee % >/dev/null
 
 " Switch to buffer when listing them
-nnoremap <leader>ls :ls<cr>:buffer<space>
+nnoremap <leader>l :ls<cr>:buffer<space>
 
 " Fast buffer cycling via Tab
 nnoremap <Tab> :bnext<CR>zR
