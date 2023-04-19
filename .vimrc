@@ -21,6 +21,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
+" invoke gutter symbol update on write
+autocmd BufWritePost * GitGutter
+" Let vim safe the buffer to swap more often also triggering refocus, thus
+" gutter update
+set updatetime=200
+
 " fzf mappings
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -39,9 +45,9 @@ autocmd FileType c,cpp,cxx,h,hpp,hxx setlocal commentstring=//\ %s
 
 
 " ----------------------------------------- Style ------------------------------------------
-syntax on                               " Enable syntax highlighting
 colorscheme torte
-" hi Visual term=reverse cterm=reverse    " Make sure visual mode is visible
+syntax on                               " Enable syntax highlighting
+" highlight Visual term=reverse cterm=reverse    " Make sure visual mode is visible
 
 set number                              " Line numbers
 
@@ -133,3 +139,11 @@ nnoremap <F10> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " search for selected text via //
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" --------------------------------------- Color fix ----------------------------------------
+"  These colors need to be set in the end otherwise they would be overwritten
+"  (e.g. by syntax=on)
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
