@@ -17,6 +17,8 @@ Plug 'machakann/vim-sandwich'
 " fzf fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" git diff annotations
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " fzf mappings
