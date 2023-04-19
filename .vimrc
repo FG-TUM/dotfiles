@@ -5,9 +5,10 @@ filetype plugin indent on               " automatically detect file types
 
 call plug#begin()
 " keybindings for commenting
+" gc                base operator
 Plug 'tpope/vim-commentary' 
 " function / structure browser based on ctags
-" gc                base operator
+" open via ,tt
 Plug 'majutsushi/tagbar'
 " Surround easy
 " sa                add surroundings
@@ -38,6 +39,7 @@ autocmd FileType c,cpp,cxx,h,hpp,hxx setlocal commentstring=//\ %s
 " ----------------------------------------- Style ------------------------------------------
 syntax on                               " Enable syntax highlighting
 colorscheme torte
+" hi Visual term=reverse cterm=reverse    " Make sure visual mode is visible
 
 set number                              " Line numbers
 
