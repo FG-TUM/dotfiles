@@ -11,9 +11,13 @@ ZSH_THEME="cypher"
 [[ $- != *i*  ]] && return
 #if not ssh session
 if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
-    # If not already running tmux start tmux
-    # [[ -z "$TMUX"  ]] && exec tmux -u
-    [[ -z "$TMUX"  ]] && exec ${HOME}/work/software/tmux/buildDir/bin/tmux -u new-session -c ${HOME}
+    tmuxExe=${HOME}/work/software/tmux/buildDir/bin/tmux
+    # If tmux exists and not already running tmux start tmux
+    if [[ -x "$tmuxExe" ]]; then
+        [[ -z "$TMUX" ]] && exec $tmuxExe -u new-session -c ${HOME}
+    else
+        echo "$tmuxExe not found or not executable!"
+    fi
 fi
 
 
@@ -56,12 +60,14 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    common-aliases
     colored-man-pages
+    common-aliases
+    conda-zsh-completion
     docker
     gpg-agent
     ubuntu
-    zsh-navigation-tools
+    # zsh-navigation-tools
+    fzf # Ctrl-C: Get names; Alt-C: cd into path
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -74,11 +80,11 @@ source $ZSH/oh-my-zsh.sh
 # source ${HOME}/work/software/cheatsheet/zsh_completion.sh
 # COMPLETION SETTINGS
 # add custom completion scripts
-fpath=(~/.oh-my-zsh/custom/completions $fpath)
+# fpath=(~/.oh-my-zsh/custom/completions $fpath)
 
 # compsys initialization
-autoload -U compinit
-compinit
+# autoload -Uz compinit
+# compinit
 
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
@@ -92,16 +98,24 @@ export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 ${HOME}/work_fast/CLion-2017.3.3/bin
 ${HOME}/work/software/LanguageTool-4.0/bin
 ${HOME}/work/workspace/GROMACS/gromacs-2018/install/bin
-${HOME}/work/software/ParaView-5.5.0-RC3-Qt5-MPI-Linux-64bit/bin
+${HOME}/work/software/ParaView/ParaView-5.11.0-RC1-MPI-Linux-Python3.9-x86_64/bin
 ${HOME}/work/software/vmd-1.9.3/installDir/bin
 ${HOME}/work/software/CMake/build/bin
 ${HOME}/work/software/cheatsheet/
+${HOME}/work/software/broot/
+${HOME}/.cabal/bin
+${HOME}/.cargo/env
+${HOME}/.cargo/bin/
 ${HOME}/.local/bin
 ${HOME}/.local/share/JetBrains/Toolbox/bin
 ${HOME}/work/software/tmux/buildDir/bin
 ${HOME}/work/software/doxygen/myBuild/bin
 ${HOME}/work/software/oni/dist/linux-unpacked
 ${HOME}/work/software/tmux-helper
+${HOME}/work/software/pdftk
+${HOME}/work/software/cinclude2dot
+${HOME}/work/software/likwid-5.2.0/installDir/bin
+${HOME}/work/software/git/myInstall/bin
 $PATH
 EOF`
 
@@ -127,8 +141,6 @@ EOF`
 # #user added
 # /home/LATEX/texmf
 # EOF`
-
-export MANPATH="${HOME}/work/software/tmux/buildDir/share/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -167,4 +179,25 @@ fi
 
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/work/ga68cat/software/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/work/ga68cat/software/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/work/ga68cat/software/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/work/ga68cat/software/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# init fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# init broot file browser: https://github.com/Canop/broot
+source /home/ga68cat/.config/broot/launcher/bash/br
 
