@@ -1,2 +1,3 @@
 # to fix C-H issue with MobXterm
 XTerm*ptyInitialErase: true
+XTerm*selectToClipboard: true
