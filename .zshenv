@@ -14,6 +14,8 @@ alias less='less -i'
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
 alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(tput bold;tput setaf 2)\" -z \"$(tput sgr0)\""
 alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint:latest"
+alias mdless='mdless 2>/dev/null'
+alias tmux.conf='${=EDITOR} ~/.tmux.conf' 
 alias vimrc='${=EDITOR} ~/.vimrc'
 alias zshenv='${=EDITOR} ~/.zshenv'
 
@@ -224,6 +226,10 @@ evince()
     # Make sure the path is not prefixed otherwise distrobox is confused.
     cd $(pwd | sed 's|^/import||')
     GTK_THEME=Adwaita:dark distrobox enter --name arsch -- /usr/bin/evince
+}
+
+objdumpInteractive() {
+    objdump --disassembler-options intel --demangle --visualize-jumps --disassemble $@ | vim -
 }
 
 # fancy file-wise git diff via fzf

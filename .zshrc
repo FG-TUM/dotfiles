@@ -8,15 +8,11 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cypher"
 # If not running interactively, do not do anything
 [[ $- != *i*  ]] && return
-#if not ssh session
-if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
-    tmuxExe=${HOME}/work/software/tmux/buildDir/bin/tmux
-    # If tmux exists and not already running tmux start tmux
-    if [[ -x "$tmuxExe" ]]; then
-        [[ -z "$TMUX" ]] && exec $tmuxExe -u new-session -c ${HOME}
-    else
-        echo "$tmuxExe not found or not executable!"
-    fi
+#if not ssh session or in IDE
+# (JETBRAINS env variable needs to be set manually in IDE terminal settings)
+if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ] && [ -z "${JETBRAINS}" ] ; then
+    # If not already running tmux start tmux
+    [[ -z "$TMUX"  ]] && exec tmux -u
 fi
 
 
@@ -66,11 +62,15 @@ fi
 #    ubuntu
 #    fzf instead of zsh-navigation-tools
 plugins=(
+    archlinux
     common-aliases
     colored-man-pages
     git
+    rust
     systemd
-    zsh-navigation-tools
+    # zsh-navigation-tools
+    fzf
+    zsh-completions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -94,7 +94,12 @@ zstyle ':completion:*' menu select=2
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 #user added
+# ~/software/miniconda3/bin
 #~/.cabal/bin
+/opt/intel/oneapi/vtune/latest/bin64
+/opt/clang-format-static/
+${HOME}/.cargo/bin
+${HOME}/.local/share/gem/ruby/3.0.0/bin
 #defaults
 $PATH
 EOF`
@@ -113,7 +118,12 @@ $LD_LIBRARY_PATH
 #/opt/cuda/lib64
 EOF`
 
-# export MANPATH="/usr/local/man:$MANPATH"
+#export INTEL_LICENSE_FILE=~/Licenses/
+# Prepend MANPATH with ":" to not lose defaults
+export MANPATH=":"`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
+#user added
+${HOME}/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/man/
+EOF`
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -149,24 +159,9 @@ fi
 # so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/work/ga68cat/software/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/work/ga68cat/software/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/work/ga68cat/software/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/work/ga68cat/software/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+#sshd_status=$(service ssh status)
+#if [[ $sshd_status = *"is not running"* ]]; then
+#  sudo service ssh --full-restart
+#fi
 
-# init fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# init broot file browser: https://github.com/Canop/broot
-source /home/ga68cat/.config/broot/launcher/bash/br
 
