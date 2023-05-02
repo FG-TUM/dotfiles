@@ -217,7 +217,6 @@ tivpdf()
     tiv ${PNG_FILENAME}-1.png ${@:1}    &&\
     rm ${PNG_FILENAME}-1.png
 }
-. "$HOME/.cargo/env"
 
 # Workaround to easily use up to date evince from arch
 evince()
