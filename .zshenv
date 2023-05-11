@@ -223,7 +223,9 @@ evince()
     # SCCS uses weird mount structure.
     # Make sure the path is not prefixed otherwise distrobox is confused.
     cd $(pwd | sed 's|^/import||')
-    GTK_THEME=Adwaita:dark distrobox enter --name arsch -- /usr/bin/evince
+    # make sure the container uses dark theme
+    # always use "distrobox-xxx" otherwise "distrobox xxx" launches "distrobox-xxx"
+    GTK_THEME=Adwaita:dark distrobox-enter --name arsch --no-tty -- /usr/bin/evince $@
 }
 
 # fancy file-wise git diff via fzf
