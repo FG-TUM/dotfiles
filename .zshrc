@@ -164,4 +164,7 @@ stty -ixon
 #  sudo service ssh --full-restart
 #fi
 
-
+if [[ -f ~/.zshrc.local ]]
+then
+  source ~/.zshrc.local
+fi

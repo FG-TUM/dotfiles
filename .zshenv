@@ -17,7 +17,9 @@ alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint:lat
 alias mdless='mdless 2>/dev/null'
 alias tmux.conf='${=EDITOR} ~/.tmux.conf' 
 alias vimrc='${=EDITOR} ~/.vimrc'
+alias vimrc.local='${=EDITOR} ~/.vimrc.local'
 alias zshenv='${=EDITOR} ~/.zshenv'
+alias zshenv.local='${=EDITOR} ~/.zshenv.local'
 
 
 # kill all incoming ssh connections
@@ -247,3 +249,8 @@ git-diff-fzf () {
     execute="enter:execute(vim $projectRoot/{})"
     git diff $@ --name-only | fzf --multi --ansi --preview $preview --bind $execute
 }
+
+if [[ -f ~/.zshenv.local ]]
+then
+  source ~/.zshenv.local
+fi
