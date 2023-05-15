@@ -220,15 +220,6 @@ tivpdf()
     rm ${PNG_FILENAME}-1.png
 }
 
-# Workaround to easily use up to date evince from arch
-evince()
-{
-    # SCCS uses weird mount structure.
-    # Make sure the path is not prefixed otherwise distrobox is confused.
-    cd $(pwd | sed 's|^/import||')
-    GTK_THEME=Adwaita:dark distrobox enter --name arsch -- /usr/bin/evince
-}
-
 objdumpInteractive() {
     objdump --disassembler-options intel --demangle --visualize-jumps --disassemble $@ | vim -
 }
