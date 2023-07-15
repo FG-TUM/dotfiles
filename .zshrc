@@ -124,6 +124,7 @@ EOF`
 
 export JAVA_HOME=/usr/lib/jvm/default-java
 export GOPATH=${HOME}/work/software/gocode
+export PYTHONSTARTUP=${HOME}/.pythonrc
 export VIMRC=${HOME}/.vimrc
 
 export LC_TIME="de_DE.utf8"
