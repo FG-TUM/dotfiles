@@ -16,6 +16,7 @@ alias wdiff="wdiff -w \"$(tput bold;tput setaf 1)\" -x \"$(tput sgr0)\" -y \"$(t
 alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint:latest"
 alias vimrc='${=EDITOR} ~/.vimrc'
 alias zshenv='${=EDITOR} ~/.zshenv'
+alias zshrc.local='${=EDITOR} ~/.zshrc.local'
 
 
 # kill all incoming ssh connections
@@ -218,15 +219,15 @@ tivpdf()
 . "$HOME/.cargo/env"
 
 # Workaround to easily use up to date evince from arch
-evince()
-{
-    # SCCS uses weird mount structure.
-    # Make sure the path is not prefixed otherwise distrobox is confused.
-    cd $(pwd | sed 's|^/import||')
-    # make sure the container uses dark theme
-    # always use "distrobox-xxx" otherwise "distrobox xxx" launches "distrobox-xxx"
-    GTK_THEME=Adwaita:dark distrobox-enter --name arsch --no-tty -- /usr/bin/evince $@
-}
+# evince()
+# {
+#     # SCCS uses weird mount structure.
+#     # Make sure the path is not prefixed otherwise distrobox is confused.
+#     cd $(pwd | sed 's|^/import||')
+#     # make sure the container uses dark theme
+#     # always use "distrobox-xxx" otherwise "distrobox xxx" launches "distrobox-xxx"
+#     GTK_THEME=Adwaita:dark distrobox-enter --name arsch --no-tty -- /usr/bin/evince $@
+# }
 
 # fancy file-wise git diff via fzf
 git-diff-fzf () {
