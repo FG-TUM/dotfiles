@@ -71,6 +71,7 @@ plugins=(
     common-aliases
     colored-man-pages
     git
+    mvn
     systemd
     zsh-navigation-tools
 )
@@ -87,7 +88,10 @@ source $ZSH/oh-my-zsh.sh
 
 # COMPLETION SETTINGS
 # add custom completion scripts
-fpath=(~/.oh-my-zsh/custom/completions ~/workspace/AutoPas/examples/md-flexible/completion/zsh $fpath)
+fpath=(
+~/.oh-my-zsh/custom/completions
+$fpath
+)
 
 # compsys initialization
 autoload -U compinit && compinit
@@ -96,19 +100,23 @@ autoload -U compinit && compinit
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 #user added
+/usr/lib/linux-tools/4.15.0-129-generic
 #~/.cabal/bin
 # $#(ls -dt /opt/intel/inspector* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/advisor* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/compilers_and_libraries* | head -n 1)/bin64
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
-${HOME}/software/CMake/build/bin
+${HOME}/software/CMake/buildDir/installDir/bin
+${HOME}/software/doxygen/build/bin
+${HOME}/software/dtrx/scripts
 ${HOME}/workspace/flutter/bin
+${HOME}/.local/bin
 ${TMUX_DIR}
 #defaults
 $PATH
 EOF`
 
-export JAVA_HOME=/usr/lib/jvm/default
+export JAVA_HOME=/usr/lib/jvm/default-java/
 export ANDROID_HOME=${HOME}/software/Android/Sdk
 export CHROME_EXECUTABLE=/usr/bin/chromium
 export GOPATH=/home/${USER}/software/gocode
@@ -134,6 +142,8 @@ export VISUAL="$EDITOR"
 #   export EDITOR='mvim'
 # fi
 
+export DISPLAY=localhost:0.0
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -148,15 +158,19 @@ export GPG_TTY=$(tty)
 #set -o vi
 
 # Windows programs
-alias foxit="'/mnt/c/Program Files (x86)/Foxit Software/Foxit Reader/FoxitReader.exe'"
+alias foxit="'/mnt/c/Program Files (x86)/Foxit Software/Foxit PDF Reader/FoxitPDFReader.exe"
 alias texstudio="'/mnt/c/Program Files (x86)/TeXstudio/texstudio.exe'"
+alias firefox="'/mnt/c/Program Files/Mozilla Firefox/firefox.exe'"
+alias imageGlass="'/mnt/d/Programs/ImageGlass/ImageGlass.exe'"
+alias vlc="'/mnt/c/Program Files/VideoLAN/VLC/vlc.exe'"
+alias inkscape="'/mnt/d/Programs/Inkscape/bin/inkscape.exe'"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
 alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
-alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
-alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
+alias echo_PATH="echo \"$PATH\" | sed 's|:|\n|'g"
+alias echo_LD_LIBRARY_PATH="echo \"$LD_LIBRARY_PATH\" | sed 's|:|\n|'g"
 alias invert_colors="xcalib -alter -invert"
 # alias ocaml="rlwrap ocaml"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less --LONG-PROMPT --LINE-NUMBERS '
@@ -170,16 +184,16 @@ alias mdless='mdless 2>/dev/null'
 # starts languagetool server if available and texstudio and terminates all processes on return
 # texstudio()
 # {
-    # if [[ $(where languagetool-startServer.sh) == "languagetool-startServer.sh not found" ]]; then
-        # echo "WARNING: languagetool not found"
-        # command texstudio $@
-    # else
-        # languagetool --http > /dev/null &
-        # #languagetool-startServer.sh > /dev/null &
-        # command texstudio $@
-        # PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
-        # echo ${PID_languagetool//$'\n'/ } | xargs kill
-    # fi
+# if [[ $(where languagetool-startServer.sh) == "languagetool-startServer.sh not found" ]]; then
+# echo "WARNING: languagetool not found"
+# command texstudio $@
+# else
+# languagetool --http > /dev/null &
+# #languagetool-startServer.sh > /dev/null &
+# command texstudio $@
+# PID_languagetool=$(ps -o pid,args | grep languagetool | head -n -1 | sed -e 's/^ *\([0-9]\+\).*/\1/')
+# echo ${PID_languagetool//$'\n'/ } | xargs kill
+# fi
 # }
 
 # insert sudo when searching from root
@@ -218,6 +232,33 @@ grepPDF()
 
 }
 
+listSelectedConfigurations()
+{
+    if [[ "$#" -lt 1 ]] ; then
+        echo "Usage $0 listOfAutoPasLogs"
+        return 1
+    fi
+
+    for f in $@ ; do
+        echo $f
+        grep Selected $f | cut -d ' ' -f6- | sort | uniq -c | sort -r
+    done
+}
+
+listSelectedConfigurationsHistory()
+{
+    if [[ "$#" -lt 1 ]] ; then
+        echo "Usage $0 listOfAutoPasLogs"
+        return 1
+    fi
+
+    for f in $@ ; do
+        echo $f
+        grep Selected $f | cut -d ' ' -f6- | uniq -c
+    done
+}
+
+
 cleanTeX()
 {
     setopt +o nomatch
@@ -248,6 +289,38 @@ stty -ixon
 
 sshd_status=$(service ssh status)
 if [[ $sshd_status = *"is not running"* ]]; then
-  sudo service ssh --full-restart
+    sudo service ssh --full-restart
 fi
 
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/seriously/software/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/seriously/software/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/seriously/software/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/seriously/software/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# fancy file-wise git diff via fzf
+git-diff-fzf () {
+    # workaround to make the command work anywhere in the repo
+    local projectRoot=$(git rev-parse --show-toplevel)
+    # abort if project root could not be found (we are not in a repo)
+    if [[ -z "$projectRoot" ]]
+    then
+        # Error message thrown by git
+        return
+    fi
+    # preview window
+    preview="git diff $@ --color=always -- ${projectRoot}/{-1}"
+    # open files in vim when pressing enter
+    execute="enter:execute(vim $projectRoot/{})"
+    git diff $@ --name-only | fzf --multi --ansi --preview $preview --bind $execute
+}
