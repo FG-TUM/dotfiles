@@ -52,6 +52,7 @@ set statusline+=%=                      " Start inserting from the right now
 set statusline+=[%Y]\                   " Filetype
 set statusline+=%-8.(%l,%c%V%)          " Line and col info with offsets
 set statusline+=\ %p%%                  " Right aligned file nav info
+set wildmenu                            " Show auto complete choices
 
 " -------------------------------------- Convenience ---------------------------------------
 set backspace=indent,eol,start          " make backspace work as expected
@@ -106,3 +107,7 @@ nnoremap <S-Tab> :bprevious<CR>zR
 
 "shortcut for running the current script in the shell
 nnoremap <leader>r :w\|!%:p<Enter>
+
+" Search and replace word under cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
