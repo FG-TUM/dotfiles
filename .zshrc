@@ -98,7 +98,7 @@ export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 ${HOME}/work_fast/CLion-2017.3.3/bin
 ${HOME}/work/software/LanguageTool-4.0/bin
 ${HOME}/work/workspace/GROMACS/gromacs-2018/install/bin
-${HOME}/work/software/ParaView/ParaView-5.11.0-RC1-MPI-Linux-Python3.9-x86_64/bin
+${HOME}/work/software/ParaView/ParaView-5.11.1-MPI-Linux-Python3.9-x86_64/bin
 ${HOME}/work/software/vmd-1.9.3/installDir/bin
 ${HOME}/work/software/CMake/build/bin
 ${HOME}/work/software/cheatsheet/
