@@ -112,16 +112,22 @@ cleanTeX()
     direcory=${1:-\.}
     direcory=${direcory%/}
 
+    rm -f ${direcory}/*.acn         > /dev/null 2>&1
+    rm -f ${direcory}/*.acr         > /dev/null 2>&1
+    rm -f ${direcory}/*.alg         > /dev/null 2>&1
     rm -f ${direcory}/*.aux         > /dev/null 2>&1
     rm -f ${direcory}/*.bbl         > /dev/null 2>&1
     rm -f ${direcory}/*.bcf         > /dev/null 2>&1
     rm -f ${direcory}/*.blg         > /dev/null 2>&1
     rm -f ${direcory}/*.dvi         > /dev/null 2>&1
     rm -f ${direcory}/*.ent         > /dev/null 2>&1
-    rm -f ${direcory}/*.glo         > /dev/null 2>&1
-    rm -f ${direcory}/*.fls         > /dev/null 2>&1
     rm -f ${direcory}/*.fdb_latexmk > /dev/null 2>&1
+    rm -f ${direcory}/*.fls         > /dev/null 2>&1
+    rm -f ${direcory}/*.glg         > /dev/null 2>&1
+    rm -f ${direcory}/*.glo         > /dev/null 2>&1
+    rm -f ${direcory}/*.gls         > /dev/null 2>&1
     rm -f ${direcory}/*.idx         > /dev/null 2>&1
+    rm -f ${direcory}/*.ist         > /dev/null 2>&1
     rm -f ${direcory}/*.lof         > /dev/null 2>&1
     rm -f ${direcory}/*.log         > /dev/null 2>&1
     rm -f ${direcory}/*.lot         > /dev/null 2>&1
