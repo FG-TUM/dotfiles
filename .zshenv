@@ -17,6 +17,7 @@ alias remark="docker run --rm -i -v \$PWD:/lint/input:ro zemanlx/remark-lint:lat
 alias vimrc='${=EDITOR} ~/.vimrc'
 alias zshenv='${=EDITOR} ~/.zshenv'
 alias zshrc.local='${=EDITOR} ~/.zshrc.local'
+alias cdgit='$(git rev-parse --show-toplevel)'
 
 
 # kill all incoming ssh connections
