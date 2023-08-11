@@ -83,7 +83,9 @@ set backspace=indent,eol,start          " make backspace work as expected
 
 set autochdir                           " always set working dir to current file
 
+" Buffer switching related
 set hidden                              " allow buffer switching without saving
+set nostartofline                       " preserve cursor location when switching buffers
 
 " Persistent undo (undo after reopening file)
 set undofile                            " So is persistent undo ...
@@ -123,8 +125,10 @@ let g:pymode_python = 'python3'
 " Shortcut for writing in a read only file
 cmap w!! w !sudo tee % >/dev/null
 
-" Switch to buffer when listing them
-nnoremap <leader>l :ls<cr>:buffer<space>
+" Show buffer list and easily select one
+nnoremap <leader>l :Buffers<CR>
+" Simpler version if fzf is not available
+" nnoremap <leader>l :ls<CR>:buffer<space>
 
 " Fast buffer cycling via Tab
 nnoremap <Tab> :bnext<CR>zR
