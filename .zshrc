@@ -98,6 +98,7 @@ export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 #~/.cabal/bin
 /opt/intel/oneapi/vtune/latest/bin64
 /opt/clang-format-static/
+${HOME}/.local/bin
 ${HOME}/.cargo/bin
 ${HOME}/.local/share/gem/ruby/3.0.0/bin
 #defaults
@@ -167,4 +168,9 @@ stty -ixon
 if [[ -f ~/.zshrc.local ]]
 then
   source ~/.zshrc.local
+fi
+
+if [[ -f /usr/share/nvm/init-nvm.sh ]]
+then 
+  source /usr/share/nvm/init-nvm.sh
 fi
