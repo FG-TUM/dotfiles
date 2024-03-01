@@ -37,7 +37,7 @@ $LD_LIBRARY_PATH
 #user added
 EOF`
 
-export DISPLAY=:1
+# export DISPLAY=:1
 
 export plot="${HOME}/work/workspace/AutoPas/examples/md-flexible/plotScript.gp"
 
