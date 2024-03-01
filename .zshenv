@@ -52,6 +52,7 @@ intellij() {
 }
 
 export ws=~/work/workspace/
+alias ws='cd "$ws"'
 
 # insert sudo when searching from root
 find()
