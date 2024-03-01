@@ -12,6 +12,10 @@ ${HOME}/work/software/vmd-1.9.3/installDir/bin
 ${HOME}/work/software/CMake/build/bin
 ${HOME}/work/software/cheatsheet/
 ${HOME}/work/software/broot/
+${HOME}/work/software/nvim-linux64/bin
+${HOME}/work/software/act/bin
+${HOME}/work/software/mathpix
+${HOME}/work/software/scripts
 ${HOME}/.cabal/bin
 ${HOME}/.cargo/env
 ${HOME}/.cargo/bin/
