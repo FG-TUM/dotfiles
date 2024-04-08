@@ -101,6 +101,7 @@ export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 ${HOME}/.local/bin
 ${HOME}/.cargo/bin
 ${HOME}/.local/share/gem/ruby/3.0.0/bin
+${HOME}/software/scripts
 #defaults
 $PATH
 EOF`
