@@ -43,6 +43,7 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 
 " cpp comment style with //
 autocmd FileType c,cpp,cxx,h,hpp,hxx setlocal commentstring=//\ %s
+autocmd FileType gp,gpl,gnuplot setlocal commentstring=#\ %s
 
 
 " ----------------------------------------- Style ------------------------------------------
