@@ -70,7 +70,7 @@ plugins=(
     systemd
     # zsh-navigation-tools
     fzf
-    zsh-completions
+    # zsh-completions # https://github.com/zsh-users/zsh-completions/issues/603
 )
 
 source $ZSH/oh-my-zsh.sh
