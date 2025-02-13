@@ -141,13 +141,6 @@ cleanTeX()
     rm -f ${direcory}/*.xdy         > /dev/null 2>&1
 }
 
-sccspdflatex()
-{
-    ln -is /home/mls/texmf ~
-    pdflatex "$@"
-    rm ~/texmf
-}
-
 unusedFigures()
 {
     if [[ $# < 2 ]]; then
