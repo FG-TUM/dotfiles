@@ -6,8 +6,8 @@ alias volume="amixer set 'Master'"
 alias jobs="jobs -l"
 # alias vivaldi="vivaldi-stable"
 # alias paraview="optirun paraview"
-alias echo_PATH="echo $PATH | sed \"s/:/\n/g\""
-alias echo_LD_LIBRARY_PATH="echo $LD_LIBRARY_PATH | sed \"s/:/\n/g\""
+alias echo_PATH="echo \$PATH | sed \"s/:/\n/g\""
+alias echo_LD_LIBRARY_PATH="echo \$LD_LIBRARY_PATH | sed \"s/:/\n/g\""
 alias invert_colors="xcalib -alter -invert"
 alias ocaml="rlwrap ocaml"
 alias less='less -i'
@@ -238,3 +238,4 @@ if [[ -f ~/.zshenv.local ]]
 then
   source ~/.zshenv.local
 fi
+. "$HOME/.cargo/env"
