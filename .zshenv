@@ -145,28 +145,39 @@ unusedFigures()
 {
     if [[ $# < 2 ]]; then
         echo "Usage: " $0 " TeXFile figuresFolder"
-    else
-        texFile=$1
-        # remove the trailing slash if it is there
-        figuresFolder=${2%/}
-
-        # show a diff of the image files in the figure folder and all \includegraphics commands
-        # -23 suppresses all common lines (-3) and thos only in the second argument, the figuresFolder (-2)
-        unused=$(comm -23 \
-            <( \ls -1 ${figuresFolder}/**/*(pdf|png)) \
-            <(sed --quiet "s|.*includegraphics.*{\(${figuresFolder}[^}]\+\).*|\1|p" ${texFile} | sort -u)
-        )
-        echo "$unused"
-        # This is zsh's version of read!
-        read -k 1 "response?Delete all listed files? [y/N] "
-        echo
-        if [[ $response =~ ^[Yy] ]]; then
-            echo "deleting ..."
-            while IFS= read -r f; do
-                rm $f
-            done <<< "$unused"
-        fi
+        exit 1
     fi
+    
+  texFile="$1"
+  figuresFolder="$2"
+
+  # Check if the LaTeX file exists
+  if [ ! -f "$texFile" ]; then
+      echo "Error: LaTeX file '$texFile' not found!"
+      exit 1
+  fi
+
+  # Check if the figures folder exists
+  if [ ! -d "$figuresFolder" ]; then
+      echo "Error: Figures folder '$figuresFolder' not found!"
+      exit 1
+  fi
+
+  # Sorted list of all paths passed to includegraphics without any potential suffixes
+  usedImages=$(sed --quiet "s|.*includegraphics.*{\(${figuresFolder}[^.}]\+\).*|\1|p" ${texFile} | sort -u)
+
+  # List all files in the folder
+  figFiles=$(find "$figuresFolder" -type f -printf "%f\n" | sort -u)
+
+  # Find unused images
+  for fig in $(echo "$figFiles")
+  do
+      figName=$(echo ${fig%.*})
+      if ! echo "$usedImages" | grep -q "^${figuresFolder}/${figName}$"
+      then
+          echo "$fig"
+      fi
+  done
 }
 
 encrypt()
