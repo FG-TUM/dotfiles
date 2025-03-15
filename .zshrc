@@ -77,9 +77,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration:
 
-# this slows zsh down considerably
-# eval $(thefuck --alias)
-
 # source ${HOME}/work/software/cheatsheet/zsh_completion.sh
 # COMPLETION SETTINGS
 # add custom completion scripts
@@ -102,6 +99,7 @@ ${HOME}/.local/bin
 ${HOME}/.cargo/bin
 ${HOME}/.local/share/gem/ruby/3.0.0/bin
 ${HOME}/software/scripts
+${HOME}/software/texstudio/myInstall/bin
 #defaults
 $PATH
 EOF`
