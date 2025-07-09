@@ -1,5 +1,6 @@
 # If not running interactively, do not do anything
 [[ $- != *i*  ]] && return
+[[ "$JETBRAINS_REMOTE_RUN" ]] && return
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -11,20 +12,20 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cypher"
 TMUX_DIR="${HOME}/software/tmux/buildDir/bin"
 TMUX_EXE="${TMUX_DIR}/tmux"
+# COMMENTED OUT BECAUSE IT SEEMS WINDOWS RESTARTS WSL WINDOWS ALL THE TIME
 #if not ssh session
-if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
-    # If not already running tmux start tmux. Attach to existing session if possible
-    if [[ -z "$TMUX"  ]]; then
-        ${TMUX_EXE} ls
-        if [[ "$?" == "1" ]]; then
-            echo "NEW"
-            exec ${TMUX_EXE} -u
-        else
-            echo "ATTACH"
-            exec ${TMUX_EXE} -u attach 
-        fi
-    fi
-fi
+# if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
+#     # If not already running tmux start tmux. Attach to existing session if possible
+#     if [[ -z "$TMUX"  ]]; then
+#         ${TMUX_EXE} ls
+#         if [[ "$?" == "1" ]]; then
+#             exec ${TMUX_EXE} -u
+#         else
+#             # -d detach any other session. Closes the WSL window frequently
+#             exec ${TMUX_EXE} -u attach
+#         fi
+#     fi
+# fi
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -66,14 +67,14 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    docker
-    ubuntu
-    common-aliases
     colored-man-pages
-    git
-    mvn
+    common-aliases
+    docker
+    gpg-agent
+    ubuntu
     systemd
-    zsh-navigation-tools
+    # zsh-navigation-tools
+    fzf # Ctrl-C: Get names; Alt-C: cd into path
 )
 # interesting plugins:
 #    archlinux 
@@ -88,15 +89,9 @@ source $ZSH/oh-my-zsh.sh
 
 # COMPLETION SETTINGS
 # add custom completion scripts
-fpath=(
-~/.oh-my-zsh/custom/completions
-$fpath
-)
 
-# compsys initialization
-autoload -U compinit && compinit
 # show completion menu when number of options is at least 2
-#zstyle ':completion:*' menu select=2
+zstyle ':completion:*' menu select=2
 
 export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 #user added
@@ -108,9 +103,10 @@ export PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 # $#(ls -dt /opt/intel/vtune_amplifier_xe_* | head -n 1)/bin64
 ${HOME}/software/CMake/buildDir/installDir/bin
 ${HOME}/software/doxygen/build/bin
-${HOME}/software/dtrx/scripts
-${HOME}/workspace/flutter/bin
+${HOME}/software/nvim-linux64/bin
+# ${HOME}/workspace/flutter/bin
 ${HOME}/.local/bin
+/usr/local/cuda/bin
 ${TMUX_DIR}
 #defaults
 $PATH
@@ -125,7 +121,7 @@ export VIMRC=/home/${USER}/.vimrc
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
 #user added
-#/opt/cuda/lib64
+/usr/local/cuda/lib64
 EOF`
 
 #export INTEL_LICENSE_FILE=~/Licenses/
@@ -161,9 +157,9 @@ export GPG_TTY=$(tty)
 alias foxit="'/mnt/c/Program Files (x86)/Foxit Software/Foxit PDF Reader/FoxitPDFReader.exe"
 alias texstudio="'/mnt/c/Program Files (x86)/TeXstudio/texstudio.exe'"
 alias firefox="'/mnt/c/Program Files/Mozilla Firefox/firefox.exe'"
-alias imageGlass="'/mnt/d/Programs/ImageGlass/ImageGlass.exe'"
+# alias imageGlass="'/mnt/d/Programs/ImageGlass/ImageGlass.exe'"
 alias vlc="'/mnt/c/Program Files/VideoLAN/VLC/vlc.exe'"
-alias inkscape="'/mnt/d/Programs/Inkscape/bin/inkscape.exe'"
+# alias inkscape="'/mnt/d/Programs/Inkscape/bin/inkscape.exe'"
 
 #alias nvidia-Visual-Profiler="nvvp"
 #alias nvidia-nsight-eclipse="nsight"
@@ -289,6 +285,7 @@ stty -ixon
 
 sshd_status=$(service ssh status)
 if [[ $sshd_status = *"is not running"* ]]; then
+    echo "starting sshd"
     sudo service ssh --full-restart
 fi
 
