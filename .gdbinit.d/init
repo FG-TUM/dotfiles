@@ -5,7 +5,8 @@
 dashboard -layout !assembly expressions !history !memory !registers !threads stack source
 #dashboard source -output /dev/pts/1
 
-dashboard source -style context 10
+dashboard source -style height 10
+dashboard source -style path True
 
 # more compact backtrace
 dashboard stack -style arguments False
