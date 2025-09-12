@@ -110,7 +110,9 @@ export CHROME_EXECUTABLE=/usr/bin/chromium
 export GOPATH=/home/${USER}/software/gocode
 export VIMRC=/home/${USER}/.vimrc
 
+export LC_ALL="en_US.utf8"
 export LC_TIME="de_DE.utf8"
+export LC_MEASUREMENT="de_DE.utf8"
 
 export LD_LIBRARY_PATH=`sed -e '/^#/'d -e '/^$/'d << EOF | paste -d ":" -s
 $LD_LIBRARY_PATH
