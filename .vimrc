@@ -150,3 +150,13 @@ highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
+
+" ---------------------------------------- Folding -----------------------------------------
+set foldmethod=syntax
+set foldlevelstart=99
+function! MyFoldText()
+    let lines = v:foldend - v:foldstart + 1
+    let firstLine = getline(v:foldstart)
+    return firstLine . ' [+' . lines . '] '
+endfunction
+set foldtext=MyFoldText()
